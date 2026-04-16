@@ -333,7 +333,7 @@ export default function CyberPhishProduct() {
               <p className="text-lg text-gray-500 leading-relaxed">
                 {getText(
                   "سايبرفيش يجمع لك التدريب بالذكاء الاصطناعي + SCORM + الإنشاء اليدوي في مكان واحد، عشان تحمي موظفينك من الهجمات بدون تعقيد",
-                  "Cyberphish brings together AI training, SCORM content and manual creation in one platform — so you can protect your team from cyber threats your way."
+                  "Cyberphish brings together AI training, SCORM content and manual creation in one platform  so you can protect your team from cyber threats your way."
                 )}
               </p>
 
@@ -385,7 +385,7 @@ export default function CyberPhishProduct() {
                       <Shield className="h-4 w-4 text-white" />
                     </div>
                     <span className="text-white font-bold text-sm">Cyberphish</span>
-                    <span className="text-white/60 text-xs">— {getText("لوحة التحكم", "Dashboard")}</span>
+                    <span className="text-white/60 text-xs"> {getText("لوحة التحكم", "Dashboard")}</span>
                   </div>
                   <div className="flex gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
@@ -542,7 +542,7 @@ export default function CyberPhishProduct() {
             </Badge>
             <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
               {isRTL ? (
-                <>3 طرق — <span className="text-green-600">وانت تختار</span></>
+                <>3 طرق  <span className="text-green-600">وانت تختار</span></>
               ) : (
                 <>Three methods, <span className="text-green-600">One choice for you.</span></>
               )}
@@ -718,7 +718,7 @@ export default function CyberPhishProduct() {
             </Badge>
             <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
               {isRTL ? (
-                <>كل اللي تحتاجه — <span className="text-green-600">بدون تعقيد</span></>
+                <>كل اللي تحتاجه  <span className="text-green-600">بدون تعقيد</span></>
               ) : (
                 <>Everything you need, <span className="text-green-600">Nothing you don't.</span></>
               )}
@@ -792,7 +792,7 @@ export default function CyberPhishProduct() {
 
               <p className="text-green-50 text-lg max-w-xl mx-auto leading-relaxed">
                 {getText(
-                  "ابدأ اليوم — بدون تعقيد وبدون بطاقة ائتمان",
+                  "ابدأ اليوم  بدون تعقيد وبدون بطاقة ائتمان",
                   "Start protecting your company today, no technical expertise needed, no credit card"
                 )}
               </p>

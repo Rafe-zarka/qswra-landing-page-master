@@ -9,7 +9,7 @@ import TermsOfUse from "@/polymet/pages/terms-of-use";
 
 export default function QswraPrototype() {
   return (
-    <Router>
+    <Router basename="/qswra-landing-page-master">
       <Routes>
         <Route
           path="/"
