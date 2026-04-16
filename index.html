@@ -72,6 +72,17 @@
     <link rel="alternate" hreflang="en" href="https://qswra.vercel.app/?lang=en" />
     <link rel="alternate" hreflang="x-default" href="https://qswra.vercel.app/" />
     
+    <!-- GitHub Pages SPA routing: restore path saved by 404.html -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

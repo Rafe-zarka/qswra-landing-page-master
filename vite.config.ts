@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/qswra-landing-page-master/',
   plugins: [react()],
   resolve: {
     alias: {
