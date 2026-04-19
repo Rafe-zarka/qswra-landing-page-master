@@ -173,6 +173,7 @@ export default function CyberPhishProduct() {
         "Choose your preferred method: AI, SCORM or manual, then assign courses to employees or teams by job role or risk level",
       highlightsAr: ["3 طرق إنشاء", "تعيين حسب الفريق", "فوري أو مجدول"],
       highlightsEn: ["3 flexible creation methods", "Assign by team or role", "Instant or scheduled launch"],
+      screenshot: "step1-create-course.png",
     },
     {
       num: "02",
@@ -191,6 +192,7 @@ export default function CyberPhishProduct() {
         "Send realistic phishing campaigns via email and SMS to test employee readiness and identify weak points before attackers do",
       highlightsAr: ["إيميل + SMS", "سيناريوهات حقيقية", "تسجيل تلقائي للتدريب"],
       highlightsEn: ["Email and SMS phishing simulations", "Realistic and up-to-date scenarios", "Auto-enrollment in remedial training"],
+      screenshot: "step2-phishing-sim.png",
     },
     {
       num: "03",
@@ -209,6 +211,7 @@ export default function CyberPhishProduct() {
         "Deliver courses automatically based on simulation results, and employees who fail phishing tests are instantly enrolled in remedial training with no manual intervention",
       highlightsAr: ["توصيل تلقائي", "تذكيرات", "متابعة فردية"],
       highlightsEn: ["Automatic course delivery", "Reminders and deadlines", "Individual and team follow-up"],
+      screenshot: "step3-interactive-labs.png",
     },
     {
       num: "04",
@@ -227,6 +230,7 @@ export default function CyberPhishProduct() {
         "Monitor completion rates, risk scores and simulation results through a comprehensive real-time dashboard, and know who is ready and who needs immediate attention",
       highlightsAr: ["لوحة تحكم مباشرة", "مخاطر لكل موظف", "تقارير جاهزة"],
       highlightsEn: ["Real-time comprehensive dashboard", "Individual employee risk profiles", "Compliance-ready reports"],
+      screenshot: "step4-analytics.png",
     },
   ];
 
@@ -306,6 +310,18 @@ export default function CyberPhishProduct() {
 
             {/* Copy side */}
             <div className={`space-y-7 ${isRTL ? "text-right" : "text-left"}`}>
+
+              {/* ── Cyberphish brand mark ── */}
+              <div className={`flex items-center gap-2.5 ${isRTL ? "flex-row-reverse" : ""}`}>
+                <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-md shadow-green-200 shrink-0">
+                  <Shield className="h-5 w-5 text-white" />
+                </div>
+                <span className="text-2xl font-black text-gray-900 tracking-tight">Cyberphish</span>
+                <Badge className="bg-green-100 text-green-700 border border-green-200 text-[10px] px-2 py-0.5 font-semibold rounded-full hidden sm:inline-flex ms-1">
+                  🇸🇦 {getText("سعودي", "Saudi")}
+                </Badge>
+              </div>
+
               <Badge className="inline-flex bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1.5 rounded-full font-medium">
                 {getText("منصة توعية أمنية مرنة فعلاً", "The Most Flexible Security Awareness Platform")}
               </Badge>
@@ -373,82 +389,27 @@ export default function CyberPhishProduct() {
               </div>
             </div>
 
-            {/* Dashboard mockup */}
+            {/* Hero screenshot */}
             <div className="relative">
               <div className="absolute -inset-6 bg-gradient-to-br from-green-200/40 to-teal-200/30 rounded-3xl blur-3xl pointer-events-none" />
               <div className="relative bg-white rounded-2xl border border-green-100 shadow-2xl shadow-green-200/50 overflow-hidden">
-
-                {/* Mockup header */}
-                <div className="bg-gradient-to-r from-green-600 to-teal-500 px-5 py-3.5 flex items-center justify-between">
-                  <div className={`flex items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
-                    <div className="w-7 h-7 bg-white/20 rounded-lg flex items-center justify-center">
-                      <Shield className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-white font-bold text-sm">Cyberphish</span>
-                    <span className="text-white/60 text-xs"> {getText("لوحة التحكم", "Dashboard")}</span>
-                  </div>
-                  <div className="flex gap-1.5">
+                {/* Browser chrome strip */}
+                <div className="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-2.5 flex items-center gap-3">
+                  <div className="flex gap-1.5 shrink-0">
                     <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
                     <div className="w-2.5 h-2.5 rounded-full bg-white/50" />
                     <div className="w-2.5 h-2.5 rounded-full bg-white/80" />
                   </div>
+                  <div className="flex-1 bg-white/15 rounded px-2.5 py-0.5 text-xs text-white/70 font-mono truncate">
+                    app.cyberphish.io
+                  </div>
                 </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-3 p-4">
-                  {[
-                    { label: isRTL ? "معدل النقر" : "Click Rate", value: "↓68%", color: "text-green-600", bg: "bg-green-50 border-green-100" },
-                    { label: isRTL ? "تم التدريب" : "Trained", value: "94%", color: "text-teal-600", bg: "bg-teal-50 border-teal-100" },
-                    { label: isRTL ? "مستوى الخطر" : "Risk Level", value: isRTL ? "منخفض" : "Low", color: "text-emerald-600", bg: "bg-emerald-50 border-emerald-100" },
-                  ].map((s) => (
-                    <div key={s.label} className={`${s.bg} border rounded-xl p-3 text-center`}>
-                      <p className={`text-xl font-black ${s.color}`}>{s.value}</p>
-                      <p className="text-[10px] text-gray-500 font-medium mt-0.5 leading-tight">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Progress bars */}
-                <div className="px-4 pb-4 space-y-3">
-                  {[
-                    { label: isRTL ? "محاكاة التصيد" : "Phishing Simulation", pct: 78 },
-                    { label: isRTL ? "إتمام التدريب" : "Training Completion", pct: 91 },
-                    { label: isRTL ? "الوعي الأمني" : "Security Awareness", pct: 85 },
-                  ].map((item) => (
-                    <div key={item.label}>
-                      <div className={`flex justify-between text-[11px] mb-1.5 ${isRTL ? "flex-row-reverse" : ""}`}>
-                        <span className="text-gray-600 font-medium">{item.label}</span>
-                        <span className="text-green-600 font-bold">{item.pct}%</span>
-                      </div>
-                      <div className="h-2 bg-green-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-green-500 to-teal-400 rounded-full"
-                          style={{ width: `${item.pct}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Activity */}
-                <div className="border-t border-gray-100 bg-gray-50/60 px-4 py-3">
-                  <p className={`text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest ${isRTL ? "text-right" : ""}`}>
-                    {getText("آخر النشاطات", "Recent Activity")}
-                  </p>
-                  {[
-                    {  ar: "أُطلقت حملة تصيد جديدة", en: "New phishing campaign launched", t: "2m ago" },
-                    {  ar: "أكمل 12 موظفاً التدريب", en: "12 employees completed training", t: "1h ago" },
-                  ].map((a, i) => (
-                    <div key={i} className={`flex items-center gap-2.5 py-1.5 ${isRTL ? "flex-row-reverse" : ""}`}>
-                      <span className="text-base shrink-0">{a.emoji}</span>
-                      <p className={`text-[11px] text-gray-600 flex-1 leading-snug ${isRTL ? "text-right" : ""}`}>
-                        {isRTL ? a.ar : a.en}
-                      </p>
-                      <span className="text-[10px] text-gray-400 shrink-0 whitespace-nowrap">{a.t}</span>
-                    </div>
-                  ))}
-                </div>
-
+                {/* Platform screenshot */}
+                <img
+                  src={`${import.meta.env.BASE_URL}screenshots/hero-dashboard.png`}
+                  alt="Cyberphish Platform Dashboard"
+                  className="w-full h-auto block"
+                />
               </div>
             </div>
 
@@ -657,19 +618,28 @@ export default function CyberPhishProduct() {
                 </ul>
               </div>
 
-              {/* Visual card side */}
+              {/* Screenshot side */}
               <div className="relative">
-                <div className={`rounded-3xl p-10 ${step.iconCardBg} shadow-2xl shadow-green-200/50 flex flex-col items-center justify-center text-center space-y-6 min-h-[280px]`}>
-                  <div className="absolute text-[10rem] font-black text-white/10 select-none leading-none top-4 start-6">
-                    {step.num}
+                <div className="absolute -inset-4 bg-gradient-to-br from-green-100/60 to-teal-100/40 rounded-3xl blur-2xl pointer-events-none" />
+                <div className="relative bg-white rounded-2xl border border-green-100 shadow-xl shadow-green-100/50 overflow-hidden">
+                  {/* Mini browser chrome */}
+                  <div className={`bg-gradient-to-r ${step.iconCardBg} px-3 py-2 flex items-center gap-2`}>
+                    <div className="flex gap-1 shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-white/30" />
+                      <div className="w-2 h-2 rounded-full bg-white/50" />
+                      <div className="w-2 h-2 rounded-full bg-white/80" />
+                    </div>
+                    <div className="flex-1 bg-white/15 rounded px-2 py-0.5 text-[10px] text-white/70 font-mono truncate">
+                      app.cyberphish.io
+                    </div>
+                    <span className="text-white/60 text-[10px] font-bold shrink-0">{step.num}</span>
                   </div>
-                  <div className="relative z-10 w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                    <step.icon className="h-10 w-10 text-white" />
-                  </div>
-                  <div className="relative z-10">
-                    <p className="text-white font-extrabold text-2xl">{getText(step.titleAr, step.titleEn)}</p>
-                    <p className="text-white/70 text-sm mt-2">{getText(step.labelAr, step.labelEn)}</p>
-                  </div>
+                  {/* Platform screenshot */}
+                  <img
+                    src={`${import.meta.env.BASE_URL}screenshots/${step.screenshot}`}
+                    alt={`${getText(step.titleAr, step.titleEn)} - Cyberphish`}
+                    className="w-full h-auto block"
+                  />
                 </div>
               </div>
 
