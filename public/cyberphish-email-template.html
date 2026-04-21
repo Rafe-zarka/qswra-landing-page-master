@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="color-scheme" content="light" />
+  <title>Cyberphish — Marketing Email Template</title>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  SUBJECT LINES  (pick one)                                           ║
+  ╠══════════════════════════════════════════════════════════════════════╣
+  ║  EN 1: "Your next phishing attack is already planned. Are you ready?"║
+  ║  EN 2: "Build a full security course with AI — in under 60 seconds" ║
+  ║  EN 3: "Stop hoping your team won't click. Start training them."    ║
+  ║  AR 1: "الهجمة الجاية ممكن توصل اليوم… فريقك جاهز؟"               ║
+  ║  AR 2: "درّب موظفينك بسرعة وبدون تعقيد"                            ║
+  ║  AR 3: "لا تخاطر في فريقك خلهم جاهزين قبل ما يصير شي"             ║
+  ╠══════════════════════════════════════════════════════════════════════╣
+  ║  PREHEADER                                                           ║
+  ║  EN: "AI training · SCORM · Manual · Phishing simulations — one     ║
+  ║       platform, full protection."                                    ║
+  ║  AR: "تدريب متكامل SCORM أو يدوي مع محاكاة تصيد في منصة وحدة."    ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+  -->
+
+  <style type="text/css">
+    /* Reset */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }
+    body { margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f0fdf4; }
+
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    /* Arabic font override */
+    [dir="rtl"], [dir="rtl"] * { font-family: 'Cairo', 'Inter', Arial, sans-serif !important; }
+
+    /* Responsive */
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .hero-title { font-size: 26px !important; line-height: 34px !important; }
+      .section-title { font-size: 20px !important; }
+      .method-cell { display: block !important; width: 100% !important; padding: 0 0 16px 0 !important; }
+      .stat-cell { display: block !important; width: 50% !important; }
+      .cta-button { font-size: 16px !important; padding: 16px 32px !important; }
+      .mobile-pad { padding-left: 20px !important; padding-right: 20px !important; }
+      .hide-mobile { display: none !important; }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;background-color:#f0fdf4;font-family:'Inter',Arial,sans-serif;">
+
+  <!-- ░░ PREHEADER (invisible) ░░ -->
+  <div style="display:none;font-size:1px;line-height:1px;max-height:0;overflow:hidden;color:#f0fdf4;">
+    AI training · SCORM · Manual courses · Phishing simulations — one platform, full protection. | تدريب متكامل SCORM أو يدوي مع محاكاة تصيد في منصة وحدة.
+    &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+  </div>
+
+  <!-- ░░ WRAPPER ░░ -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f0fdf4;">
+    <tr>
+      <td align="center" style="padding:24px 16px;">
+
+        <!-- ░░ EMAIL CARD (600px) ░░ -->
+        <table class="email-container" role="presentation" border="0" cellpadding="0" cellspacing="0" width="600"
+          style="background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 40px rgba(22,163,74,0.10);">
+
+          <!-- ══════════════════════════════════════════════
+               HEADER — Logo + nav accent
+          ══════════════════════════════════════════════ -->
+          <tr>
+            <td align="center" style="background: linear-gradient(135deg, #16a34a 0%, #0d9488 100%); padding:0;">
+              <!-- Top green stripe -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding: 28px 40px 24px;" align="center">
+                    <!-- Logo -->
+                    <img
+                      src="screenshots/cyberphish-logo.png"
+                      alt="Cyberphish"
+                      width="180"
+                      style="max-width:180px;height:auto;display:block;margin:0 auto;"
+                    />
+                    <!-- Fallback text logo if image missing -->
+                    <!--[if !mso]><!-->
+                    <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.7);font-family:'Inter',Arial,sans-serif;letter-spacing:0.05em;">
+                      by Qswra · بواسطة قسورة
+                    </div>
+                    <!--<![endif]-->
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ══════════════════════════════════════════════
+               ▌ ENGLISH SECTION
+          ══════════════════════════════════════════════ -->
+
+          <!-- EN — HERO -->
+          <tr>
+            <td style="background: linear-gradient(160deg, #f0fdf4 0%, #ffffff 60%); padding: 48px 40px 32px;" align="left">
+
+              <!-- Badge -->
+              <div style="display:inline-block;background-color:#dcfce7;border:1px solid #bbf7d0;border-radius:50px;padding:6px 16px;margin-bottom:20px;">
+                <span style="font-size:12px;font-weight:700;color:#15803d;font-family:'Inter',Arial,sans-serif;letter-spacing:0.04em;">
+                  SECURITY AWARENESS PLATFORM
+                </span>
+              </div>
+
+              <!-- Headline -->
+              <h1 class="hero-title" style="font-size:32px;line-height:40px;font-weight:900;color:#111827;margin:0 0 16px;font-family:'Inter',Arial,sans-serif;">
+                One platform.<br/>
+                <span style="background:linear-gradient(90deg,#16a34a,#0d9488);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                  Every way to train.
+                </span>
+              </h1>
+
+              <!-- Sub-headline -->
+              <p style="font-size:16px;line-height:26px;color:#4b5563;margin:0 0 28px;font-family:'Inter',Arial,sans-serif;">
+                Your employees are the <strong style="color:#111827;">most targeted</strong> part of your organization —
+                and the least protected. Cyberphish gives you three powerful ways to train them,
+                simulate real attacks, and track every risk.
+                <strong style="color:#15803d;">No complexity. No excuses.</strong>
+              </p>
+
+              <!-- Pain points -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                <tr>
+                  <td style="padding:0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:18px 20px;width:100%;">
+                      <tr>
+                        <td>
+                          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#991b1b;font-family:'Inter',Arial,sans-serif;">
+                            Does this sound familiar?
+                          </p>
+                          <p style="margin:0;font-size:13px;line-height:22px;color:#7f1d1d;font-family:'Inter',Arial,sans-serif;">
+                            • Building a training course takes <strong>days of manual work</strong><br/>
+                            • 91% of breaches start with a <strong>single human mistake</strong><br/>
+                            • You have no way to know <strong>who will click the phishing link</strong>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- EN — TURNING POINT -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#16a34a 0%,#0d9488 100%);padding:36px 40px;" align="center">
+              <p style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.12em;text-transform:uppercase;margin:0 0 12px;font-family:'Inter',Arial,sans-serif;">
+                THE TURNING POINT
+              </p>
+              <h2 style="font-size:24px;font-weight:800;color:#ffffff;margin:0;line-height:32px;font-family:'Inter',Arial,sans-serif;">
+                "What if training was<br/>
+                <span style="color:#bbf7d0;">automated, flexible, and scalable?"</span>
+              </h2>
+            </td>
+          </tr>
+
+          <!-- EN — 3 METHODS -->
+          <tr>
+            <td style="padding:40px 40px 24px;" align="left">
+              <p style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',Arial,sans-serif;">
+                THREE TRAINING METHODS
+              </p>
+              <h2 class="section-title" style="font-size:22px;font-weight:800;color:#111827;margin:0 0 24px;font-family:'Inter',Arial,sans-serif;">
+                Train your team your way
+              </h2>
+
+              <!-- Method cards -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                <!-- Method 1: AI -->
+                <tr>
+                  <td style="padding-bottom:14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:20px;">
+                      <tr>
+                        <td width="44" valign="top" style="padding-right:16px;">
+                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#16a34a,#0d9488);border-radius:10px;text-align:center;line-height:40px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">
+                            AI
+                          </div>
+                        </td>
+                        <td valign="top">
+                          <p style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;">
+                            AI-Generated Training
+                          </p>
+                          <p style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;">
+                            Type a topic → get a <strong>complete course</strong> with lessons, slides, voice narration
+                            and quizzes in <strong style="color:#16a34a;">under 60 seconds.</strong>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Method 2: SCORM -->
+                <tr>
+                  <td style="padding-bottom:14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:14px;padding:20px;">
+                      <tr>
+                        <td width="44" valign="top" style="padding-right:16px;">
+                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#0d9488,#059669);border-radius:10px;text-align:center;line-height:40px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">
+                            SC
+                          </div>
+                        </td>
+                        <td valign="top">
+                          <p style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;">
+                            SCORM Upload
+                          </p>
+                          <p style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;">
+                            Already have content from Articulate or iSpring?
+                            <strong>Upload your SCORM packages</strong> and Cyberphish hosts, tracks,
+                            and certifies them <strong style="color:#0d9488;">instantly.</strong>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Method 3: Manual -->
+                <tr>
+                  <td style="padding-bottom:0;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#f0fdf4;border:1px solid #a7f3d0;border-radius:14px;padding:20px;">
+                      <tr>
+                        <td width="44" valign="top" style="padding-right:16px;">
+                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#059669,#16a34a);border-radius:10px;text-align:center;line-height:40px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">
+                            M
+                          </div>
+                        </td>
+                        <td valign="top">
+                          <p style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;">
+                            Manual Course Builder
+                          </p>
+                          <p style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;">
+                            Need full control? Build custom courses with your own content,
+                            design <strong>flexible learning paths,</strong> and tailor training
+                            to <strong style="color:#059669;">your company culture.</strong>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- EN — STATS BAR -->
+          <tr>
+            <td style="padding:8px 40px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                style="background:linear-gradient(135deg,#f0fdf4,#ccfbf1);border:1px solid #bbf7d0;border-radius:14px;padding:20px 16px;">
+                <tr>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;border-right:1px solid #bbf7d0;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#16a34a;font-family:'Inter',Arial,sans-serif;">↓68%</p>
+                    <p style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">Phishing click rate</p>
+                  </td>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;border-right:1px solid #bbf7d0;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#0d9488;font-family:'Inter',Arial,sans-serif;">10×</p>
+                    <p style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">Faster course creation</p>
+                  </td>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;border-right:1px solid #bbf7d0;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#059669;font-family:'Inter',Arial,sans-serif;">100%</p>
+                    <p style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">Risk visibility</p>
+                  </td>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#16a34a;font-family:'Inter',Arial,sans-serif;">∞</p>
+                    <p style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">Scale without limits</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- EN — HOW IT WORKS -->
+          <tr>
+            <td style="padding:0 40px 32px;" align="left">
+              <p style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',Arial,sans-serif;">
+                HOW IT WORKS
+              </p>
+              <h2 class="section-title" style="font-size:20px;font-weight:800;color:#111827;margin:0 0 20px;font-family:'Inter',Arial,sans-serif;">
+                From setup to results in 4 steps
+              </h2>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td valign="top" style="width:28px;padding-right:12px;padding-bottom:16px;">
+                    <div style="width:24px;height:24px;background:#16a34a;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">1</div>
+                  </td>
+                  <td valign="top" style="padding-bottom:16px;">
+                    <p style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;">Create Training</p>
+                    <p style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;">Use AI, SCORM or manual builder — publish in minutes.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="width:28px;padding-right:12px;padding-bottom:16px;">
+                    <div style="width:24px;height:24px;background:#0d9488;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">2</div>
+                  </td>
+                  <td valign="top" style="padding-bottom:16px;">
+                    <p style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;">Launch Phishing Simulations</p>
+                    <p style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;">Send real-looking email & SMS attacks. Find your weak spots first.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="width:28px;padding-right:12px;padding-bottom:16px;">
+                    <div style="width:24px;height:24px;background:#059669;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">3</div>
+                  </td>
+                  <td valign="top" style="padding-bottom:16px;">
+                    <p style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;">Auto-Enroll & Remediate</p>
+                    <p style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;">Employees who fail are instantly enrolled in remedial training.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="width:28px;padding-right:12px;">
+                    <div style="width:24px;height:24px;background:#16a34a;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">4</div>
+                  </td>
+                  <td valign="top">
+                    <p style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;">Track & Report</p>
+                    <p style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;">Live risk scores, completion rates, and compliance-ready reports.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- EN — CTA -->
+          <tr>
+            <td style="padding:8px 40px 40px;" align="center">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                style="background:linear-gradient(135deg,#16a34a,#0d9488);border-radius:16px;width:100%;overflow:hidden;">
+                <tr>
+                  <td style="padding:36px 32px;" align="center">
+                    <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.1em;text-transform:uppercase;font-family:'Inter',Arial,sans-serif;">
+                      Your next attack is already planned
+                    </p>
+                    <h2 style="margin:0 0 12px;font-size:24px;font-weight:900;color:#ffffff;font-family:'Inter',Arial,sans-serif;">
+                      Is your team ready?
+                    </h2>
+                    <p style="margin:0 0 24px;font-size:14px;color:rgba(255,255,255,0.85);font-family:'Inter',Arial,sans-serif;">
+                      Start free today. No credit card. No technical setup required.
+                    </p>
+                    <!-- Primary CTA -->
+                    <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
+                      class="cta-button"
+                      style="display:inline-block;background:#ffffff;color:#16a34a;font-size:15px;font-weight:800;text-decoration:none;padding:15px 36px;border-radius:50px;font-family:'Inter',Arial,sans-serif;letter-spacing:0.01em;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                      Start Free Now
+                    </a>
+                    <br/><br/>
+                    <!-- Secondary CTA -->
+                    <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
+                      style="display:inline-block;color:rgba(255,255,255,0.9);font-size:13px;font-weight:600;text-decoration:underline;font-family:'Inter',Arial,sans-serif;">
+                      or Request a Live Demo →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- DIVIDER -->
+          <tr>
+            <td style="padding:0 40px;">
+              <div style="height:1px;background:linear-gradient(90deg,transparent,#bbf7d0,transparent);"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:12px 40px;" align="center">
+              <p style="margin:0;font-size:11px;color:#9ca3af;font-family:'Inter',Arial,sans-serif;">
+                Arabic version below &nbsp; · &nbsp; النسخة العربية أدناه
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0 40px;">
+              <div style="height:1px;background:linear-gradient(90deg,transparent,#bbf7d0,transparent);"></div>
+            </td>
+          </tr>
+
+          <!-- ══════════════════════════════════════════════
+               ▌ ARABIC SECTION  (RTL)
+          ══════════════════════════════════════════════ -->
+
+          <!-- AR — HERO -->
+          <tr>
+            <td dir="rtl" style="background:linear-gradient(160deg,#f0fdf4 0%,#ffffff 60%);padding:48px 40px 32px;" align="right">
+
+              <!-- Badge -->
+              <div style="display:inline-block;background-color:#dcfce7;border:1px solid #bbf7d0;border-radius:50px;padding:6px 16px;margin-bottom:20px;">
+                <span style="font-size:12px;font-weight:700;color:#15803d;font-family:'Inter',Arial,sans-serif;letter-spacing:0.04em;">
+                  منصة التوعية الأمنية
+                </span>
+              </div>
+
+              <!-- Headline -->
+              <h1 class="hero-title" dir="rtl" style="font-size:32px;line-height:44px;font-weight:900;color:#111827;margin:0 0 16px;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                منصة وحدة<br/>
+                <span style="background:linear-gradient(90deg,#0d9488,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                  كل طرق التدريب
+                </span>
+              </h1>
+
+              <!-- Sub-headline -->
+              <p dir="rtl" style="font-size:16px;line-height:28px;color:#4b5563;margin:0 0 28px;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                موظفينك هم <strong style="color:#111827;">الهدف الأول</strong> لأي هجوم وغالباً أقل ناس تدريب. سايبرفيش يعطيك أكثر من طريقة تدربهم وتشغل محاكاة هجمات حقيقية وتتابع كل شي بسهولة <strong style="color:#15803d;">وبدون تعقيد</strong>
+              </p>
+
+              <!-- Pain points -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                <tr>
+                  <td>
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:18px 20px;width:100%;">
+                      <tr>
+                        <td>
+                          <p dir="rtl" style="margin:0 0 8px;font-size:13px;font-weight:700;color:#991b1b;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                            هذا الشي يصير عندكم؟
+                          </p>
+                          <p dir="rtl" style="margin:0;font-size:13px;line-height:24px;color:#7f1d1d;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                            • إعداد دورة تدريب <strong>ياخذ وقت طويل وشغل يدوي متعب</strong><br/>
+                            • أغلب الاختراقات تبدأ من <strong>خطأ بسيط من موظف</strong><br/>
+                            • ما عندك طريقة واضحة تعرف <strong>مين ممكن يضغط على رابط خطير</strong>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- AR — TURNING POINT -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#16a34a 0%,#0d9488 100%);padding:36px 40px;" align="center">
+              <p style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 12px;font-family:'Inter',Arial,sans-serif;">
+                خلنا نغير الوضع
+              </p>
+              <h2 dir="rtl" style="font-size:24px;font-weight:800;color:#ffffff;margin:0;line-height:36px;font-family:'Inter',Arial,sans-serif;text-align:center;">
+                "وش لو التدريب صار أسهل<br/>
+                <span style="color:#bbf7d0;">ويمشي معك بدون تعب"</span>
+              </h2>
+            </td>
+          </tr>
+
+          <!-- AR — 3 METHODS -->
+          <tr>
+            <td dir="rtl" style="padding:40px 40px 24px;" align="right">
+              <p style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                طرق التدريب
+              </p>
+              <h2 class="section-title" dir="rtl" style="font-size:22px;font-weight:800;color:#111827;margin:0 0 24px;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                درّب فريقك بالطريقة اللي تناسبك
+              </h2>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                <!-- Method 1: AI -->
+                <tr>
+                  <td style="padding-bottom:14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:20px;">
+                      <tr>
+                        <td valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                              <td valign="middle" style="padding-left:14px;">
+                                <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تدريب جاهز بسرعة</p>
+                                <p dir="rtl" style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                                  اكتب الموضوع وخلال وقت قصير <strong style="color:#16a34a;">تحصل على دورة كاملة</strong> فيها دروس وشرائح واختبار جاهزة للاستخدام.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Method 2: SCORM -->
+                <tr>
+                  <td style="padding-bottom:14px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:14px;padding:20px;">
+                      <tr>
+                        <td>
+                          <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">رفع SCORM</p>
+                          <p dir="rtl" style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                            إذا عندك محتوى جاهز <strong>تقدر ترفعه مباشرة</strong> والمنصة تشغله وتتابع التقدم وتعطي شهادات <strong style="color:#0d9488;">تلقائياً.</strong>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Method 3: Manual -->
+                <tr>
+                  <td>
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                      style="background:#f0fdf4;border:1px solid #a7f3d0;border-radius:14px;padding:20px;">
+                      <tr>
+                        <td>
+                          <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">إنشاء يدوي</p>
+                          <p dir="rtl" style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                            لو تفضل تبني التدريب بنفسك تقدر تسوي كل شي <strong style="color:#059669;">بالطريقة اللي تناسب شركتك</strong> وتتحكم بالتفاصيل.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- AR — STATS -->
+          <tr>
+            <td style="padding:8px 40px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                style="background:linear-gradient(135deg,#f0fdf4,#ccfbf1);border:1px solid #bbf7d0;border-radius:14px;padding:20px 16px;">
+                <tr>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;border-left:1px solid #bbf7d0;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#16a34a;font-family:'Inter',Arial,sans-serif;">↓68%</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">انخفاض الضغط على روابط التصيد</p>
+                  </td>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;border-left:1px solid #bbf7d0;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#0d9488;font-family:'Inter',Arial,sans-serif;">10×</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">توفير وقت إنشاء الدورات</p>
+                  </td>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;border-left:1px solid #bbf7d0;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#059669;font-family:'Inter',Arial,sans-serif;">100%</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">وضوح كامل للمخاطر</p>
+                  </td>
+                  <td class="stat-cell" align="center" style="padding:8px 12px;">
+                    <p style="margin:0;font-size:28px;font-weight:900;color:#16a34a;font-family:'Inter',Arial,sans-serif;">∞</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">توسع بدون حدود</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- AR — HOW IT WORKS -->
+          <tr>
+            <td dir="rtl" style="padding:0 40px 32px;" align="right">
+              <p style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                كيف تشتغل
+              </p>
+              <h2 class="section-title" dir="rtl" style="font-size:20px;font-weight:800;color:#111827;margin:0 0 20px;font-family:'Inter',Arial,sans-serif;text-align:right;">
+                من البداية للنتيجة بخطوات بسيطة
+              </h2>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td valign="top" style="width:36px;padding-left:12px;padding-bottom:16px;" align="right">
+                    <div style="width:24px;height:24px;background:#16a34a;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">١</div>
+                  </td>
+                  <td valign="top" style="padding-bottom:16px;" align="right">
+                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">ابدأ التدريب</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">اختر الطريقة اللي تناسبك وابدأ نشر التدريب خلال وقت قصير.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="width:36px;padding-left:12px;padding-bottom:16px;" align="right">
+                    <div style="width:24px;height:24px;background:#0d9488;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">٢</div>
+                  </td>
+                  <td valign="top" style="padding-bottom:16px;" align="right">
+                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">شغل محاكاة التصيد</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">أرسل حملات واقعية بالإيميل أو الرسائل واكتشف نقاط الضعف.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="width:36px;padding-left:12px;padding-bottom:16px;" align="right">
+                    <div style="width:24px;height:24px;background:#059669;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">٣</div>
+                  </td>
+                  <td valign="top" style="padding-bottom:16px;" align="right">
+                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تدريب تلقائي</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">أي موظف يغلط يتم تسجيله مباشرة في تدريب مناسب.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="width:36px;padding-left:12px;" align="right">
+                    <div style="width:24px;height:24px;background:#16a34a;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">٤</div>
+                  </td>
+                  <td valign="top" align="right">
+                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تابع وطور</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">شوف تقارير واضحة عن الأداء والمخاطر لكل موظف.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- AR — CTA -->
+          <tr>
+            <td style="padding:8px 40px 48px;" align="center">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                style="background:linear-gradient(135deg,#0d9488,#16a34a);border-radius:16px;width:100%;overflow:hidden;">
+                <tr>
+                  <td style="padding:36px 32px;" align="center">
+                    <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.08em;text-transform:uppercase;font-family:'Inter',Arial,sans-serif;">
+                      الهجمة ممكن تصير بأي وقت
+                    </p>
+                    <h2 dir="rtl" style="margin:0 0 12px;font-size:24px;font-weight:900;color:#ffffff;font-family:'Inter',Arial,sans-serif;">
+                      هل فريقك جاهز؟
+                    </h2>
+                    <p dir="rtl" style="margin:0 0 24px;font-size:14px;color:rgba(255,255,255,0.85);font-family:'Inter',Arial,sans-serif;">
+                      ابدأ اليوم بدون تعقيد وبدون متطلبات تقنية
+                    </p>
+                    <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
+                      class="cta-button"
+                      style="display:inline-block;background:#ffffff;color:#16a34a;font-size:15px;font-weight:800;text-decoration:none;padding:15px 36px;border-radius:50px;font-family:'Inter',Arial,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                      ابدأ الآن مجاناً
+                    </a>
+                    <br/><br/>
+                    <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
+                      style="display:inline-block;color:rgba(255,255,255,0.9);font-size:13px;font-weight:600;text-decoration:underline;font-family:'Inter',Arial,sans-serif;">
+                      أو احجز ديمو ←
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ══════════════════════════════════════════════
+               FOOTER
+          ══════════════════════════════════════════════ -->
+          <tr>
+            <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:28px 40px;" align="center">
+              <!-- Logo small -->
+              <img
+                src="screenshots/cyberphish-logo.png"
+                alt="Cyberphish"
+                width="100"
+                style="max-width:100px;height:auto;display:block;margin:0 auto 12px;opacity:0.7;"
+              />
+              <p style="margin:0 0 8px;font-size:11px;color:#9ca3af;font-family:'Inter',Arial,sans-serif;">
+                Cyberphish من Qswra · الرياض، المملكة العربية السعودية
+              </p>
+              <p style="margin:0 0 12px;font-size:11px;color:#9ca3af;font-family:'Inter',Arial,sans-serif;">
+                <a href="https://rafe-zarka.github.io/qswra-landing-page-master/products/cyberphish"
+                  style="color:#16a34a;text-decoration:none;">زيارة الموقع</a>
+                &nbsp;·&nbsp;
+                <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
+                  style="color:#16a34a;text-decoration:none;">تواصل معنا</a>
+                &nbsp;·&nbsp;
+                <a href="#" style="color:#9ca3af;text-decoration:none;">إلغاء الاشتراك</a>
+              </p>
+              <p style="margin:0;font-size:10px;color:#d1d5db;font-family:'Inter',Arial,sans-serif;">
+                © 2024 Cyberphish · جميع الحقوق محفوظة
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- END EMAIL CARD -->
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

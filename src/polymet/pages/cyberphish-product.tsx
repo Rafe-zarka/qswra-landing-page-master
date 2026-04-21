@@ -16,7 +16,6 @@ import {
   CheckCircle,
   ArrowRight,
   ArrowLeft,
-  Shield,
   PenTool,
   AlertTriangle,
   TrendingDown,
@@ -313,9 +312,11 @@ export default function CyberPhishProduct() {
 
               {/* ── Cyberphish brand mark ── */}
               <div className={`flex items-center gap-2.5 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-md shadow-green-200 shrink-0">
-                  <Shield className="h-5 w-5 text-white" />
-                </div>
+                <img
+                  src={`${import.meta.env.BASE_URL}screenshots/cyberphish-icon.png`}
+                  alt="Cyberphish"
+                  className="w-10 h-10 rounded-xl object-cover shrink-0 shadow-md shadow-green-200"
+                />
                 <span className="text-2xl font-black text-gray-900 tracking-tight">Cyberphish</span>
                 <Badge className="bg-green-100 text-green-700 border border-green-200 text-[10px] px-2 py-0.5 font-semibold rounded-full hidden sm:inline-flex ms-1">
                   🇸🇦 {getText("سعودي", "Saudi")}
@@ -769,7 +770,7 @@ export default function CyberPhishProduct() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
                 <Button size="lg" className="bg-white text-green-700 hover:bg-green-50 px-8 h-14 rounded-xl font-bold text-base shadow-lg transition-colors" asChild>
-                  <Link to="/#contact">{getText("ابدأ الآن", "Start Free Now")}</Link>
+                  <Link to="/#contact">{getText("ابدأ الآن", "Start Now")}</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 px-8 h-14 rounded-xl font-semibold text-base transition-colors" asChild>
                   <Link to="/#contact">{getText("احجز ديمو", "Book a Demo")}</Link>

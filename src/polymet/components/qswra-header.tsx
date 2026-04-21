@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MenuIcon, XIcon, PhoneIcon, MailIcon, Shield } from "lucide-react";
+import { MenuIcon, XIcon, PhoneIcon, MailIcon } from "lucide-react";
 import { useLanguage } from "@/polymet/components/language-context";
 import LanguageToggle from "@/polymet/components/language-toggle";
 import { Link, useLocation } from "react-router-dom";
@@ -62,9 +62,11 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                 to="/products/cyberphish"
                 className={`flex items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-md shadow-green-200 shrink-0">
-                  <Shield className="h-4 w-4 text-white" />
-                </div>
+                <img
+                  src={`${import.meta.env.BASE_URL}screenshots/cyberphish-icon.png`}
+                  alt="Cyberphish"
+                  className="w-8 h-8 rounded-xl object-cover shrink-0 shadow-md shadow-green-200"
+                />
                 <div className={isRTL ? "text-right" : "text-left"}>
                   <p className="text-[15px] font-black text-gray-900 leading-none tracking-tight">
                     Cyberphish
@@ -176,9 +178,11 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                 <div className={`flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
                   {isCyberphish ? (
                     <>
-                      <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-md shadow-green-200 shrink-0">
-                        <Shield className="h-5 w-5 text-white" />
-                      </div>
+                      <img
+                        src={`${import.meta.env.BASE_URL}screenshots/cyberphish-icon.png`}
+                        alt="Cyberphish"
+                        className="w-10 h-10 rounded-xl object-cover shrink-0 shadow-md shadow-green-200"
+                      />
                       <div className={isRTL ? "text-right" : "text-left"}>
                         <h2 className="text-lg font-black text-gray-900 leading-none">Cyberphish</h2>
                         <p className="text-[11px] text-green-600 font-semibold mt-0.5">
