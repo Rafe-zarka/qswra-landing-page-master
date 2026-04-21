@@ -14,15 +14,14 @@
   ║  EN 1: "Your next phishing attack is already planned. Are you ready?"║
   ║  EN 2: "Build a full security course with AI — in under 60 seconds" ║
   ║  EN 3: "Stop hoping your team won't click. Start training them."    ║
-  ║  AR 1: "هجوم التصيد القادم مُخطَّط له الآن — هل فريقك جاهز؟"       ║
-  ║  AR 2: "دورة تدريب أمني كاملة بالذكاء الاصطناعي خلال ثوانٍ"         ║
-  ║  AR 3: "لا تتمنى أن موظفيك ما ينخدعون — درّبهم قبل فوات الأوان"    ║
+  ║  AR 1: "الهجمة الجاية ممكن توصل اليوم… فريقك جاهز؟"               ║
+  ║  AR 2: "درّب موظفينك بسرعة وبدون تعقيد"                            ║
+  ║  AR 3: "لا تخاطر في فريقك خلهم جاهزين قبل ما يصير شي"             ║
   ╠══════════════════════════════════════════════════════════════════════╣
   ║  PREHEADER                                                           ║
   ║  EN: "AI training · SCORM · Manual · Phishing simulations — one     ║
   ║       platform, full protection."                                    ║
-  ║  AR: "تدريب بالذكاء الاصطناعي · SCORM · يدوي · محاكاة تصيد         ║
-  ║       — منصة واحدة، حماية كاملة."                                   ║
+  ║  AR: "تدريب متكامل SCORM أو يدوي مع محاكاة تصيد في منصة وحدة."    ║
   ╚══════════════════════════════════════════════════════════════════════╝
   -->
 
@@ -34,7 +33,10 @@
     body { margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f0fdf4; }
 
     /* Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    /* Arabic font override */
+    [dir="rtl"], [dir="rtl"] * { font-family: 'Cairo', 'Inter', Arial, sans-serif !important; }
 
     /* Responsive */
     @media only screen and (max-width: 600px) {
@@ -54,7 +56,7 @@
 
   <!-- ░░ PREHEADER (invisible) ░░ -->
   <div style="display:none;font-size:1px;line-height:1px;max-height:0;overflow:hidden;color:#f0fdf4;">
-    AI training · SCORM · Manual courses · Phishing simulations — one platform, full protection. | تدريب بالذكاء الاصطناعي · SCORM · يدوي · محاكاة تصيد — منصة واحدة، حماية كاملة.
+    AI training · SCORM · Manual courses · Phishing simulations — one platform, full protection. | تدريب متكامل SCORM أو يدوي مع محاكاة تصيد في منصة وحدة.
     &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
   </div>
 
@@ -78,7 +80,7 @@
                   <td style="padding: 28px 40px 24px;" align="center">
                     <!-- Logo -->
                     <img
-                      src="https://rafe-zarka.github.io/qswra-landing-page-master/screenshots/cyberphish-logo.png"
+                      src="screenshots/cyberphish-logo.png"
                       alt="Cyberphish"
                       width="180"
                       style="max-width:180px;height:auto;display:block;margin:0 auto;"
@@ -106,7 +108,7 @@
               <!-- Badge -->
               <div style="display:inline-block;background-color:#dcfce7;border:1px solid #bbf7d0;border-radius:50px;padding:6px 16px;margin-bottom:20px;">
                 <span style="font-size:12px;font-weight:700;color:#15803d;font-family:'Inter',Arial,sans-serif;letter-spacing:0.04em;">
-                  🛡️ SECURITY AWARENESS PLATFORM
+                  SECURITY AWARENESS PLATFORM
                 </span>
               </div>
 
@@ -135,7 +137,7 @@
                       <tr>
                         <td>
                           <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#991b1b;font-family:'Inter',Arial,sans-serif;">
-                            ⚠️ Does this sound familiar?
+                            Does this sound familiar?
                           </p>
                           <p style="margin:0;font-size:13px;line-height:22px;color:#7f1d1d;font-family:'Inter',Arial,sans-serif;">
                             • Building a training course takes <strong>days of manual work</strong><br/>
@@ -185,8 +187,8 @@
                       style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:20px;">
                       <tr>
                         <td width="44" valign="top" style="padding-right:16px;">
-                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#16a34a,#0d9488);border-radius:10px;text-align:center;line-height:40px;font-size:18px;">
-                            🤖
+                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#16a34a,#0d9488);border-radius:10px;text-align:center;line-height:40px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">
+                            AI
                           </div>
                         </td>
                         <td valign="top">
@@ -210,8 +212,8 @@
                       style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:14px;padding:20px;">
                       <tr>
                         <td width="44" valign="top" style="padding-right:16px;">
-                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#0d9488,#059669);border-radius:10px;text-align:center;line-height:40px;font-size:18px;">
-                            📦
+                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#0d9488,#059669);border-radius:10px;text-align:center;line-height:40px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">
+                            SC
                           </div>
                         </td>
                         <td valign="top">
@@ -236,8 +238,8 @@
                       style="background:#f0fdf4;border:1px solid #a7f3d0;border-radius:14px;padding:20px;">
                       <tr>
                         <td width="44" valign="top" style="padding-right:16px;">
-                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#059669,#16a34a);border-radius:10px;text-align:center;line-height:40px;font-size:18px;">
-                            🧑‍🏫
+                          <div style="width:40px;height:40px;background:linear-gradient(135deg,#059669,#16a34a);border-radius:10px;text-align:center;line-height:40px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">
+                            M
                           </div>
                         </td>
                         <td valign="top">
@@ -356,7 +358,7 @@
                     <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
                       class="cta-button"
                       style="display:inline-block;background:#ffffff;color:#16a34a;font-size:15px;font-weight:800;text-decoration:none;padding:15px 36px;border-radius:50px;font-family:'Inter',Arial,sans-serif;letter-spacing:0.01em;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-                      🚀 Start Free Now
+                      Start Free Now
                     </a>
                     <br/><br/>
                     <!-- Secondary CTA -->
@@ -379,7 +381,7 @@
           <tr>
             <td style="padding:12px 40px;" align="center">
               <p style="margin:0;font-size:11px;color:#9ca3af;font-family:'Inter',Arial,sans-serif;">
-                ✦ &nbsp; Arabic version below &nbsp; · &nbsp; النسخة العربية أدناه &nbsp; ✦
+                Arabic version below &nbsp; · &nbsp; النسخة العربية أدناه
               </p>
             </td>
           </tr>
@@ -400,24 +402,21 @@
               <!-- Badge -->
               <div style="display:inline-block;background-color:#dcfce7;border:1px solid #bbf7d0;border-radius:50px;padding:6px 16px;margin-bottom:20px;">
                 <span style="font-size:12px;font-weight:700;color:#15803d;font-family:'Inter',Arial,sans-serif;letter-spacing:0.04em;">
-                  🛡️ منصة التوعية الأمنية
+                  منصة التوعية الأمنية
                 </span>
               </div>
 
               <!-- Headline -->
               <h1 class="hero-title" dir="rtl" style="font-size:32px;line-height:44px;font-weight:900;color:#111827;margin:0 0 16px;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                منصة واحدة.<br/>
+                منصة وحدة<br/>
                 <span style="background:linear-gradient(90deg,#0d9488,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-                  كل طرق التدريب.
+                  كل طرق التدريب
                 </span>
               </h1>
 
               <!-- Sub-headline -->
               <p dir="rtl" style="font-size:16px;line-height:28px;color:#4b5563;margin:0 0 28px;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                موظفيك هم <strong style="color:#111827;">الهدف الأول</strong> للمهاجمين —
-                وغالباً الأقل تدريباً. سايبرفيش يعطيك ثلاث طرق قوية لتدريبهم،
-                محاكاة هجمات حقيقية، وتتبع كل مخاطرة.
-                <strong style="color:#15803d;">بدون تعقيد. بدون أعذار.</strong>
+                موظفينك هم <strong style="color:#111827;">الهدف الأول</strong> لأي هجوم وغالباً أقل ناس تدريب. سايبرفيش يعطيك أكثر من طريقة تدربهم وتشغل محاكاة هجمات حقيقية وتتابع كل شي بسهولة <strong style="color:#15803d;">وبدون تعقيد</strong>
               </p>
 
               <!-- Pain points -->
@@ -429,12 +428,12 @@
                       <tr>
                         <td>
                           <p dir="rtl" style="margin:0 0 8px;font-size:13px;font-weight:700;color:#991b1b;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                            ⚠️ هل هذا يبدو مألوفاً؟
+                            هذا الشي يصير عندكم؟
                           </p>
                           <p dir="rtl" style="margin:0;font-size:13px;line-height:24px;color:#7f1d1d;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                            • إعداد دورة تدريبية يأخذ <strong>أيام من العمل اليدوي</strong><br/>
-                            • 91% من الاختراقات تبدأ بـ <strong>خطأ بشري واحد بسيط</strong><br/>
-                            • ما عندك طريقة تعرف <strong>مين سيضغط على رابط التصيد</strong>
+                            • إعداد دورة تدريب <strong>ياخذ وقت طويل وشغل يدوي متعب</strong><br/>
+                            • أغلب الاختراقات تبدأ من <strong>خطأ بسيط من موظف</strong><br/>
+                            • ما عندك طريقة واضحة تعرف <strong>مين ممكن يضغط على رابط خطير</strong>
                           </p>
                         </td>
                       </tr>
@@ -449,11 +448,11 @@
           <tr>
             <td style="background:linear-gradient(135deg,#16a34a 0%,#0d9488 100%);padding:36px 40px;" align="center">
               <p style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 12px;font-family:'Inter',Arial,sans-serif;">
-                نقطة التحول
+                خلنا نغير الوضع
               </p>
               <h2 dir="rtl" style="font-size:24px;font-weight:800;color:#ffffff;margin:0;line-height:36px;font-family:'Inter',Arial,sans-serif;text-align:center;">
-                "لو التدريب يصير تلقائي، سهل،<br/>
-                <span style="color:#bbf7d0;">ويتوسع معك؟"</span>
+                "وش لو التدريب صار أسهل<br/>
+                <span style="color:#bbf7d0;">ويمشي معك بدون تعب"</span>
               </h2>
             </td>
           </tr>
@@ -462,7 +461,7 @@
           <tr>
             <td dir="rtl" style="padding:40px 40px 24px;" align="right">
               <p style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                ثلاث طرق للتدريب
+                طرق التدريب
               </p>
               <h2 class="section-title" dir="rtl" style="font-size:22px;font-weight:800;color:#111827;margin:0 0 24px;font-family:'Inter',Arial,sans-serif;text-align:right;">
                 درّب فريقك بالطريقة اللي تناسبك
@@ -480,9 +479,9 @@
                           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
                               <td valign="middle" style="padding-left:14px;">
-                                <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تدريب بالذكاء الاصطناعي 🤖</p>
+                                <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تدريب جاهز بسرعة</p>
                                 <p dir="rtl" style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                                  اكتب الموضوع وخلّ الذكاء الاصطناعي يعمل الباقي — دورة كاملة بدروس وشرائح وصوت واختبار <strong style="color:#16a34a;">خلال ثوانٍ.</strong>
+                                  اكتب الموضوع وخلال وقت قصير <strong style="color:#16a34a;">تحصل على دورة كاملة</strong> فيها دروس وشرائح واختبار جاهزة للاستخدام.
                                 </p>
                               </td>
                             </tr>
@@ -500,9 +499,9 @@
                       style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:14px;padding:20px;">
                       <tr>
                         <td>
-                          <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">رفع SCORM 📦</p>
+                          <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">رفع SCORM</p>
                           <p dir="rtl" style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                            عندك محتوى جاهز من Articulate أو iSpring؟ <strong>ارفعه مباشرة</strong> — سايبرفيش يشغّله ويتتبع ويصدر الشهادات <strong style="color:#0d9488;">تلقائياً.</strong>
+                            إذا عندك محتوى جاهز <strong>تقدر ترفعه مباشرة</strong> والمنصة تشغله وتتابع التقدم وتعطي شهادات <strong style="color:#0d9488;">تلقائياً.</strong>
                           </p>
                         </td>
                       </tr>
@@ -517,9 +516,9 @@
                       style="background:#f0fdf4;border:1px solid #a7f3d0;border-radius:14px;padding:20px;">
                       <tr>
                         <td>
-                          <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">إنشاء يدوي 🧑‍🏫</p>
+                          <p dir="rtl" style="margin:0 0 4px;font-size:15px;font-weight:800;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">إنشاء يدوي</p>
                           <p dir="rtl" style="margin:0;font-size:13px;line-height:21px;color:#374151;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                            تبغى تحكم كامل؟ ابنِ دوراتك بنفسك، صمّم مسارات تعلم مرنة، وخصّص المحتوى <strong style="color:#059669;">لثقافة شركتك.</strong>
+                            لو تفضل تبني التدريب بنفسك تقدر تسوي كل شي <strong style="color:#059669;">بالطريقة اللي تناسب شركتك</strong> وتتحكم بالتفاصيل.
                           </p>
                         </td>
                       </tr>
@@ -539,19 +538,19 @@
                 <tr>
                   <td class="stat-cell" align="center" style="padding:8px 12px;border-left:1px solid #bbf7d0;">
                     <p style="margin:0;font-size:28px;font-weight:900;color:#16a34a;font-family:'Inter',Arial,sans-serif;">↓68%</p>
-                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">انخفاض النقر على التصيد</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">انخفاض الضغط على روابط التصيد</p>
                   </td>
                   <td class="stat-cell" align="center" style="padding:8px 12px;border-left:1px solid #bbf7d0;">
                     <p style="margin:0;font-size:28px;font-weight:900;color:#0d9488;font-family:'Inter',Arial,sans-serif;">10×</p>
-                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">سرعة إنشاء الدورات</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">توفير وقت إنشاء الدورات</p>
                   </td>
                   <td class="stat-cell" align="center" style="padding:8px 12px;border-left:1px solid #bbf7d0;">
                     <p style="margin:0;font-size:28px;font-weight:900;color:#059669;font-family:'Inter',Arial,sans-serif;">100%</p>
-                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">رؤية كاملة للمخاطر</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">وضوح كامل للمخاطر</p>
                   </td>
                   <td class="stat-cell" align="center" style="padding:8px 12px;">
                     <p style="margin:0;font-size:28px;font-weight:900;color:#16a34a;font-family:'Inter',Arial,sans-serif;">∞</p>
-                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">توسع بلا حدود</p>
+                    <p dir="rtl" style="margin:4px 0 0;font-size:11px;color:#4b5563;font-family:'Inter',Arial,sans-serif;">توسع بدون حدود</p>
                   </td>
                 </tr>
               </table>
@@ -562,10 +561,10 @@
           <tr>
             <td dir="rtl" style="padding:0 40px 32px;" align="right">
               <p style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                كيف يشتغل
+                كيف تشتغل
               </p>
               <h2 class="section-title" dir="rtl" style="font-size:20px;font-weight:800;color:#111827;margin:0 0 20px;font-family:'Inter',Arial,sans-serif;text-align:right;">
-                من البداية للنتائج في 4 خطوات
+                من البداية للنتيجة بخطوات بسيطة
               </h2>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -574,7 +573,7 @@
                   </td>
                   <td valign="top" style="padding-bottom:16px;" align="right">
                     <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">ابدأ التدريب</p>
-                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">استخدم AI أو SCORM أو الإنشاء اليدوي — انشر خلال دقائق.</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">اختر الطريقة اللي تناسبك وابدأ نشر التدريب خلال وقت قصير.</p>
                   </td>
                 </tr>
                 <tr>
@@ -582,8 +581,8 @@
                     <div style="width:24px;height:24px;background:#0d9488;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">٢</div>
                   </td>
                   <td valign="top" style="padding-bottom:16px;" align="right">
-                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">أطلق حملات تصيد</p>
-                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">أرسل هجمات إيميل وSMS واقعية. اكتشف نقاط ضعفك أولاً.</p>
+                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">شغل محاكاة التصيد</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">أرسل حملات واقعية بالإيميل أو الرسائل واكتشف نقاط الضعف.</p>
                   </td>
                 </tr>
                 <tr>
@@ -591,8 +590,8 @@
                     <div style="width:24px;height:24px;background:#059669;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:#fff;font-family:'Inter',Arial,sans-serif;">٣</div>
                   </td>
                   <td valign="top" style="padding-bottom:16px;" align="right">
-                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تدريب علاجي تلقائي</p>
-                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">أي موظف ينخدع يُسجَّل تلقائياً في تدريب فوري.</p>
+                    <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تدريب تلقائي</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">أي موظف يغلط يتم تسجيله مباشرة في تدريب مناسب.</p>
                   </td>
                 </tr>
                 <tr>
@@ -601,7 +600,7 @@
                   </td>
                   <td valign="top" align="right">
                     <p dir="rtl" style="margin:0 0 2px;font-size:14px;font-weight:700;color:#111827;font-family:'Inter',Arial,sans-serif;text-align:right;">تابع وطور</p>
-                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">ملفات مخاطر لكل موظف، معدلات إتمام، وتقارير امتثال جاهزة.</p>
+                    <p dir="rtl" style="margin:0;font-size:12px;color:#6b7280;font-family:'Inter',Arial,sans-serif;text-align:right;">شوف تقارير واضحة عن الأداء والمخاطر لكل موظف.</p>
                   </td>
                 </tr>
               </table>
@@ -616,23 +615,23 @@
                 <tr>
                   <td style="padding:36px 32px;" align="center">
                     <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.08em;text-transform:uppercase;font-family:'Inter',Arial,sans-serif;">
-                      الهجوم القادم مُخطَّط له الآن
+                      الهجمة ممكن تصير بأي وقت
                     </p>
                     <h2 dir="rtl" style="margin:0 0 12px;font-size:24px;font-weight:900;color:#ffffff;font-family:'Inter',Arial,sans-serif;">
-                      فريقك جاهز؟
+                      هل فريقك جاهز؟
                     </h2>
                     <p dir="rtl" style="margin:0 0 24px;font-size:14px;color:rgba(255,255,255,0.85);font-family:'Inter',Arial,sans-serif;">
-                      ابدأ اليوم — بدون بطاقة ائتمان، بدون إعداد تقني.
+                      ابدأ اليوم بدون تعقيد وبدون متطلبات تقنية
                     </p>
                     <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
                       class="cta-button"
                       style="display:inline-block;background:#ffffff;color:#16a34a;font-size:15px;font-weight:800;text-decoration:none;padding:15px 36px;border-radius:50px;font-family:'Inter',Arial,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-                      🚀 ابدأ مجاناً الآن
+                      ابدأ الآن مجاناً
                     </a>
                     <br/><br/>
                     <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
                       style="display:inline-block;color:rgba(255,255,255,0.9);font-size:13px;font-weight:600;text-decoration:underline;font-family:'Inter',Arial,sans-serif;">
-                      أو احجز ديمو مباشر ←
+                      أو احجز ديمو ←
                     </a>
                   </td>
                 </tr>
@@ -647,25 +646,25 @@
             <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:28px 40px;" align="center">
               <!-- Logo small -->
               <img
-                src="https://rafe-zarka.github.io/qswra-landing-page-master/screenshots/cyberphish-logo.png"
+                src="screenshots/cyberphish-logo.png"
                 alt="Cyberphish"
                 width="100"
                 style="max-width:100px;height:auto;display:block;margin:0 auto 12px;opacity:0.7;"
               />
               <p style="margin:0 0 8px;font-size:11px;color:#9ca3af;font-family:'Inter',Arial,sans-serif;">
-                Cyberphish by Qswra · Riyadh, Saudi Arabia · 🇸🇦
+                Cyberphish من Qswra · الرياض، المملكة العربية السعودية
               </p>
               <p style="margin:0 0 12px;font-size:11px;color:#9ca3af;font-family:'Inter',Arial,sans-serif;">
                 <a href="https://rafe-zarka.github.io/qswra-landing-page-master/products/cyberphish"
-                  style="color:#16a34a;text-decoration:none;">Visit Cyberphish</a>
+                  style="color:#16a34a;text-decoration:none;">زيارة الموقع</a>
                 &nbsp;·&nbsp;
                 <a href="https://rafe-zarka.github.io/qswra-landing-page-master/#contact"
-                  style="color:#16a34a;text-decoration:none;">Contact Us</a>
+                  style="color:#16a34a;text-decoration:none;">تواصل معنا</a>
                 &nbsp;·&nbsp;
-                <a href="#" style="color:#9ca3af;text-decoration:none;">Unsubscribe</a>
+                <a href="#" style="color:#9ca3af;text-decoration:none;">إلغاء الاشتراك</a>
               </p>
               <p style="margin:0;font-size:10px;color:#d1d5db;font-family:'Inter',Arial,sans-serif;">
-                © 2024 Cyberphish · All rights reserved · جميع الحقوق محفوظة
+                © 2024 Cyberphish · جميع الحقوق محفوظة
               </p>
             </td>
           </tr>
