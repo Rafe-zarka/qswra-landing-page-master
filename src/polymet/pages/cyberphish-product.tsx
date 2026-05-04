@@ -26,7 +26,6 @@ import {
   UserCheck,
   ChevronDown,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
 export default function CyberPhishProduct() {
   const { getText, isRTL } = useLanguage();
@@ -358,21 +357,19 @@ export default function CyberPhishProduct() {
                 <Button
                   size="lg"
                   className="bg-green-600 hover:bg-green-500 text-white px-8 h-14 rounded-xl shadow-lg shadow-green-200 font-semibold text-base transition-colors"
-                  asChild
+                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}
                 >
-                  <Link to="/#contact">
-                    {isRTL
-                      ? <><ArrowIcon className="ms-2 h-4 w-4" />{getText("ابدأ مجاناً", "Get Started Free")}</>
-                      : <>{getText("ابدأ مجاناً", "Get Started Free")}<ArrowIcon className="ms-2 h-4 w-4" /></>}
-                  </Link>
+                  {isRTL
+                    ? <><ArrowIcon className="ms-2 h-4 w-4" />{getText("ابدأ مجاناً", "Get Started Free")}</>
+                    : <>{getText("ابدأ مجاناً", "Get Started Free")}<ArrowIcon className="ms-2 h-4 w-4" /></>}
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-green-300 text-green-700 hover:bg-green-50 bg-white px-8 h-14 rounded-xl font-semibold text-base transition-colors"
-                  asChild
+                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/dashboard", "_blank")}
                 >
-                  <Link to="/#contact">{getText("احجز ديمو", "Request a Demo")}</Link>
+                  {getText(" ديمو", "Demo")}
                 </Button>
               </div>
 
@@ -496,7 +493,7 @@ export default function CyberPhishProduct() {
       {/* ═══════════════════════════════════════════════════════════════
           4. TRAINING CREATION (Three Equal Methods)
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
+      <section id="features" className="bg-white py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1 rounded-full">
@@ -564,7 +561,7 @@ export default function CyberPhishProduct() {
       ═══════════════════════════════════════════════════════════════ */}
 
       {/* Step progress indicator */}
-      <section className="bg-green-50 py-12 border-y border-green-100">
+      <section id="how-it-works" className="bg-green-50 py-12 border-y border-green-100">
         <div className="container mx-auto px-4 max-w-4xl">
           <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-green-600 mb-8">
             {getText("رحلة سايبرفيش خطوة بخطوة", "The Cyberphish Journey from Start to Results")}
@@ -652,7 +649,7 @@ export default function CyberPhishProduct() {
       {/* ═══════════════════════════════════════════════════════════════
           9. RESULTS
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-gradient-to-br from-green-50 to-emerald-50 py-20 md:py-28 border-y border-green-100">
+      <section id="results" className="bg-gradient-to-br from-green-50 to-emerald-50 py-20 md:py-28 border-y border-green-100">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1 rounded-full">
@@ -742,7 +739,7 @@ export default function CyberPhishProduct() {
       {/* ═══════════════════════════════════════════════════════════════
           13. CTA
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-green-50 py-20 md:py-28">
+      <section id="contact" className="bg-green-50 py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-green-500 via-green-600 to-teal-500 px-8 py-16 md:py-20 text-center shadow-2xl shadow-green-300/40">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-white/10 rounded-full blur-3xl pointer-events-none" />
@@ -769,11 +766,13 @@ export default function CyberPhishProduct() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-                <Button size="lg" className="bg-white text-green-700 hover:bg-green-50 px-8 h-14 rounded-xl font-bold text-base shadow-lg transition-colors" asChild>
-                  <Link to="/#contact">{getText("ابدأ الآن", "Start Now")}</Link>
+                <Button size="lg" className="bg-white text-green-700 hover:bg-green-50 px-8 h-14 rounded-xl font-bold text-base shadow-lg transition-colors"
+                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}>
+                  {getText("ابدأ الآن", "Start Now")}
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 px-8 h-14 rounded-xl font-semibold text-base transition-colors" asChild>
-                  <Link to="/#contact">{getText("احجز ديمو", "Book a Demo")}</Link>
+                <Button size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 px-8 h-14 rounded-xl font-semibold text-base transition-colors"
+                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/dashboard", "_blank")}>
+                  {getText("احجز ديمو", "Book a Demo")}
                 </Button>
               </div>
             </div>
@@ -784,7 +783,7 @@ export default function CyberPhishProduct() {
       {/* ═══════════════════════════════════════════════════════════════
           14. FAQ
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
+      <section id="faq" className="bg-white py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">

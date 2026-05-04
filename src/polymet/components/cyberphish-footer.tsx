@@ -80,14 +80,12 @@ export default function CyberphishFooter() {
             <Button
               size="lg"
               className="bg-white text-green-700 hover:bg-green-50 font-bold px-7 h-12 rounded-xl shadow-lg shadow-green-900/20 shrink-0 gap-2 transition-colors"
-              asChild
+              onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}
             >
-              <Link to="/#contact">
-                {isRTL
-                  ? <><ArrowIcon className="h-4 w-4" />{getText("ابدأ مجاناً", "Start Free")}</>
-                  : <>{getText("ابدأ مجاناً", "Start Free")}<ArrowIcon className="h-4 w-4" /></>
-                }
-              </Link>
+              {isRTL
+                ? <><ArrowIcon className="h-4 w-4" />{getText("ابدأ مجاناً", "Start Free")}</>
+                : <>{getText("ابدأ مجاناً", "Start Free")}<ArrowIcon className="h-4 w-4" /></>
+              }
             </Button>
           </div>
         </div>

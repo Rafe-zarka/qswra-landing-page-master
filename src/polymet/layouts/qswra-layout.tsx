@@ -4,7 +4,7 @@ import QswraHeader from "@/polymet/components/qswra-header";
 import QswraFooter from "@/polymet/components/qswra-footer";
 import CyberphishFooter from "@/polymet/components/cyberphish-footer";
 import { LanguageProvider } from "@/polymet/components/language-context";
-import { navigation } from "@/polymet/data/qswra-data";
+import { navigation, cyberphishNavigation } from "@/polymet/data/qswra-data";
 
 interface QswraLayoutProps {
   children: ReactNode;
@@ -37,7 +37,7 @@ function LayoutInner({ children }: QswraLayoutProps) {
         }}
       />
 
-      <QswraHeader navigation={navigation} />
+      <QswraHeader navigation={isCyberphish ? cyberphishNavigation : navigation} />
 
       <main className="flex-1 flex flex-col">{children}</main>
 

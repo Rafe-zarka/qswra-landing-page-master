@@ -261,6 +261,14 @@ export const navigation = [
   { name: "تواصل معنا", nameEn: "Contact", href: "#contact" },
 ];
 
+export const cyberphishNavigation = [
+  { name: "المزايا", nameEn: "Features", href: "#features" },
+  { name: "كيف يشتغل", nameEn: "How It Works", href: "#how-it-works" },
+  { name: "النتائج", nameEn: "Results", href: "#results" },
+  { name: "الأسئلة", nameEn: "FAQ", href: "#faq" },
+  { name: "تواصل معنا", nameEn: "Contact", href: "#contact" },
+];
+
 // Language context
 export const createLanguageContext = () => {
   const [language, setLanguage] = React.useState("ar");

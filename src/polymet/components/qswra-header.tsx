@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -20,6 +20,7 @@ interface QswraHeaderProps {
 
 export default function QswraHeader({ navigation }: QswraHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { getText, isRTL } = useLanguage();
   const { pathname } = useLocation();
   const isCyberphish = pathname === "/products/cyberphish";
@@ -33,6 +34,30 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
     }
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    const sectionHrefs = navigation
+      .filter((item) => item.href.startsWith("#"))
+      .map((item) => item.href);
+
+    if (sectionHrefs.length === 0) return;
+
+    const handleScroll = () => {
+      const offset = 100;
+      let current = "";
+      for (const href of sectionHrefs) {
+        const el = document.querySelector(href);
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = href;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [navigation, pathname]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -111,8 +136,12 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                 onClick={() => scrollToSection(item.href)}
                 className={`text-sm font-medium transition-colors ${
                   isCyberphish
-                    ? "text-gray-700 hover:text-green-600"
-                    : "text-gray-700 hover:text-blue-600"
+                    ? activeSection === item.href
+                      ? "text-green-600 font-semibold border-b-2 border-green-500 pb-0.5"
+                      : "text-gray-600 hover:text-green-600"
+                    : activeSection === item.href
+                      ? "text-blue-600 font-semibold border-b-2 border-blue-500 pb-0.5"
+                      : "text-gray-600 hover:text-blue-600"
                 }`}
               >
                 {getText(item.name, item.nameEn)}
@@ -136,11 +165,9 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
               <Button
                 size="sm"
                 className="bg-gradient-to-r from-green-600 to-teal-500 hover:from-green-700 hover:to-teal-600 text-white gap-1.5 shadow-sm shadow-green-200 font-semibold px-5"
-                asChild
+                onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}
               >
-                <Link to="/#contact">
-                  {getText("ابدأ مجاناً", "Get Started Free")}
-                </Link>
+                {getText("ابدأ مجاناً", "Get Started Free")}
               </Button>
             </div>
           ) : (
@@ -248,11 +275,9 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                 {isCyberphish ? (
                   <Button
                     className="w-full bg-gradient-to-r from-green-600 to-teal-500 hover:from-green-700 hover:to-teal-600 text-white font-semibold"
-                    asChild
+                    onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}
                   >
-                    <Link to="/#contact">
-                      {getText("ابدأ مجاناً", "Get Started Free")}
-                    </Link>
+                    {getText("ابدأ مجاناً", "Get Started Free")}
                   </Button>
                 ) : (
                   <Button

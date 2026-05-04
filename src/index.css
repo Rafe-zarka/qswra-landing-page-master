@@ -61,6 +61,11 @@
     }
 }
 
+/* Offset sections below the sticky navbar (h-16 = 64px + 16px breathing room) */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
 @layer base {
     * {
       @apply border-border;
