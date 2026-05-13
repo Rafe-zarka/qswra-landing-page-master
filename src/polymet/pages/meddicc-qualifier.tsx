@@ -6,8 +6,6 @@ import {
   FileDown,
   AlertTriangle,
   ArrowRight,
-  Settings,
-  X,
   BarChart3,
 } from "lucide-react";
 import { LOGO_ICON } from "./meddicc-logos";
@@ -180,16 +178,6 @@ export default function MeddiccQualifier() {
   const [aiResults, setAiResults] = useState<AiResults | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  // API key (env var → localStorage → empty)
-  const [apiKey, setApiKey] = useState<string>(
-    () =>
-      (import.meta.env.VITE_ANTHROPIC_API_KEY as string | undefined) ||
-      localStorage.getItem("cp_meddicc_api_key") ||
-      ""
-  );
-  const [showApiPanel, setShowApiPanel] = useState(false);
-  const [apiKeyDraft, setApiKeyDraft] = useState("");
-
   // Toast
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
@@ -260,14 +248,6 @@ export default function MeddiccQualifier() {
     setTimeout(() => setToastMsg(null), 3500);
   };
 
-  const saveApiKey = () => {
-    const key = apiKeyDraft.trim();
-    setApiKey(key);
-    localStorage.setItem("cp_meddicc_api_key", key);
-    setShowApiPanel(false);
-    setApiKeyDraft("");
-    showToast(getText("تم حفظ مفتاح API", "API key saved"));
-  };
 
   // ── AI analysis ─────────────────────────────────────────────────────────────
 
@@ -288,9 +268,9 @@ Respond ONLY with valid JSON — no markdown, no preamble:
   };
 
   const handleAnalyze = async () => {
-    if (!apiKey) {
-      setShowApiPanel(true);
-      showToast(getText("أدخل مفتاح API أولاً", "Enter your API key first"));
+    const key = import.meta.env.VITE_ANTHROPIC_API_KEY as string | undefined;
+    if (!key) {
+      showToast(getText("خدمة التحليل غير متوفرة حالياً", "AI analysis is currently unavailable"));
       return;
     }
     setIsAnalyzing(true);
@@ -300,7 +280,7 @@ Respond ONLY with valid JSON — no markdown, no preamble:
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": apiKey,
+          "x-api-key": key,
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-allow-browser": "true",
         },
@@ -704,51 +684,73 @@ Respond ONLY with valid JSON — no markdown, no preamble:
     doc.text("MEDDICC QUALIFICATION DETAILS", ml + 10, y + 17);
     y += 32;
 
+    const CARD_H = 84;
+    const MAX_NOTE_CHARS = 240;
     MEDDICC_ITEMS.forEach((item, idx) => {
       const st = statuses[idx];
-      const nt = notes[idx].trim() || "—";
-      const noteLines = doc.splitTextToSize(nt, cw - 100);
-      const cardH = Math.max(56, noteLines.length * 13 + 42);
-      if (y + cardH > ph - 50) {
+      const rawNote = notes[idx].trim() || "—";
+      const nt = rawNote.length > MAX_NOTE_CHARS
+        ? rawNote.substring(0, MAX_NOTE_CHARS - 2) + "…"
+        : rawNote;
+      const noteLines = (doc.splitTextToSize(nt, cw - 110) as string[]).slice(0, 3);
+      if (y + CARD_H > ph - 50) {
         doc.addPage();
         y = 50;
       }
       doc.setFillColor(...GRAY);
-      doc.roundedRect(ml, y, cw, cardH, 4, 4, "F");
+      doc.roundedRect(ml, y, cw, CARD_H, 4, 4, "F");
       const stC: [number, number, number] =
         st === "confirmed" ? GREEN : st === "progress" ? [217, 119, 6] : [134, 217, 166];
       doc.setFillColor(...stC);
-      doc.roundedRect(ml, y, 5, cardH, 2, 2, "F");
+      doc.roundedRect(ml, y, 5, CARD_H, 2, 2, "F");
+
+      // Key letter
       doc.setFontSize(20);
       doc.setFont("helvetica", "bold");
       doc.setTextColor(...GREEN);
-      doc.text(item.key, ml + 14, y + 30);
+      doc.text(item.key, ml + 14, y + 29);
+
+      // Title + hint
       doc.setFontSize(11);
       doc.setFont("helvetica", "bold");
       doc.setTextColor(...DARK);
-      doc.text(item.titleEn, ml + 36, y + 18);
-      doc.setFontSize(8);
+      doc.text(item.titleEn, ml + 36, y + 17);
+      doc.setFontSize(7.5);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(...MID);
-      doc.text(item.hintEn, ml + 36, y + 29);
+      const hintTrunc = item.hintEn.length > 70 ? item.hintEn.substring(0, 68) + "…" : item.hintEn;
+      doc.text(hintTrunc, ml + 36, y + 27);
+
+      // Status badge
       const stLabel = st === "confirmed" ? "Confirmed" : st === "progress" ? "In progress" : "Not started";
       const stW = doc.getTextWidth(stLabel) + 14;
       doc.setFillColor(...stC);
-      doc.roundedRect(pw - mr - stW - 2, y + 8, stW + 2, 16, 4, 4, "F");
+      doc.roundedRect(pw - mr - stW - 2, y + 7, stW + 2, 15, 4, 4, "F");
       doc.setTextColor(...WHITE);
-      doc.setFontSize(8);
+      doc.setFontSize(7.5);
       doc.setFont("helvetica", "bold");
-      doc.text(stLabel, pw - mr - stW + 2, y + 18);
-      doc.setFontSize(9);
+      doc.text(stLabel, pw - mr - stW + 2, y + 16);
+
+      // Separator
+      doc.setDrawColor(...BORDER);
+      doc.setLineWidth(0.3);
+      doc.line(ml + 8, y + 33, ml + cw - 8, y + 33);
+
+      // Note lines (max 3)
+      doc.setFontSize(8.5);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(...DARK);
       noteLines.forEach((line: string, li: number) => {
-        doc.text(line, ml + 36, y + 42 + li * 13);
+        doc.text(line, ml + 36, y + 44 + li * 12);
       });
-      doc.setFontSize(7.5);
+
+      // Weight label
+      doc.setFontSize(7);
+      doc.setFont("helvetica", "bold");
       doc.setTextColor(...MID);
-      doc.text(`Weight: ${item.weight}%`, ml + 36, y + cardH - 8);
-      y += cardH + 8;
+      doc.text(`Weight: ${item.weight}%`, ml + 10, y + CARD_H - 7);
+
+      y += CARD_H + 7;
     });
     addFooter(3);
 
@@ -861,54 +863,8 @@ Respond ONLY with valid JSON — no markdown, no preamble:
             <span className="text-xs border border-gray-200 rounded-full px-3 py-1 text-gray-500 bg-white">
               {dealStage || getText("لا مرحلة محددة", "No stage set")}
             </span>
-            <button
-              onClick={() => { setShowApiPanel((v) => !v); setApiKeyDraft(apiKey); }}
-              className="p-2 rounded-lg hover:bg-gray-200 text-gray-400 transition-colors"
-              title={getText("إعدادات مفتاح API", "API key settings")}
-            >
-              <Settings className="w-4 h-4" />
-            </button>
           </div>
         </div>
-
-        {/* ── API key panel ── */}
-        {showApiPanel && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3">
-            <div className={`flex items-center justify-between ${isRTL ? "flex-row-reverse" : ""}`}>
-              <p className="text-sm font-semibold text-amber-800">
-                {getText("مفتاح Anthropic API", "Anthropic API Key")}
-              </p>
-              <button
-                onClick={() => setShowApiPanel(false)}
-                className="text-amber-600 hover:text-amber-800"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <p className="text-xs text-amber-700">
-              {getText(
-                "مطلوب لتشغيل تحليل الذكاء الاصطناعي. يُخزَّن محلياً فقط.",
-                "Required to run AI analysis. Stored locally only."
-              )}
-            </p>
-            <div className={`flex gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
-              <input
-                type="password"
-                value={apiKeyDraft}
-                onChange={(e) => setApiKeyDraft(e.target.value)}
-                placeholder="sk-ant-..."
-                className="flex-1 text-sm px-3 py-2 border border-amber-300 rounded-lg bg-white focus:outline-none focus:border-green-500"
-                dir="ltr"
-              />
-              <button
-                onClick={saveApiKey}
-                className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-500 transition-colors"
-              >
-                {getText("حفظ", "Save")}
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* ── Deal information ── */}
         <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
