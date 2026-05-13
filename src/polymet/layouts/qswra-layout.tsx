@@ -12,7 +12,9 @@ interface QswraLayoutProps {
 
 function LayoutInner({ children }: QswraLayoutProps) {
   const { pathname } = useLocation();
-  const isCyberphish = pathname === "/products/cyberphish";
+  const isCyberphish =
+    pathname === "/products/cyberphish" ||
+    pathname === "/tools/meddicc-qualifier";
 
   return (
     <div className="min-h-screen flex flex-col w-full">

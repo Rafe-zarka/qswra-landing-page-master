@@ -6,6 +6,7 @@ import PhishAgentProduct from "@/polymet/pages/phish-agent-product";
 import GrcPlatformProduct from "@/polymet/pages/grc-platform-product";
 import PrivacyPolicy from "@/polymet/pages/privacy-policy";
 import TermsOfUse from "@/polymet/pages/terms-of-use";
+import MeddiccQualifier from "@/polymet/pages/meddicc-qualifier";
 
 export default function QswraPrototype() {
   return (
@@ -70,6 +71,15 @@ export default function QswraPrototype() {
           element={
             <QswraLayout>
               <TermsOfUse />
+            </QswraLayout>
+          }
+        />
+
+        <Route
+          path="/tools/meddicc-qualifier"
+          element={
+            <QswraLayout>
+              <MeddiccQualifier />
             </QswraLayout>
           }
         />
