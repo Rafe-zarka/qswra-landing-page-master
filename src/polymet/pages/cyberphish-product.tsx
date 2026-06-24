@@ -1,808 +1,512 @@
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/polymet/components/language-context";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
+  Shield,
   Sparkles,
   Mail,
-  Upload,
-  BarChart2,
-  Users,
-  CheckCircle,
-  ArrowRight,
-  ArrowLeft,
-  PenTool,
-  AlertTriangle,
-  TrendingDown,
-  Award,
-  Clock,
   Zap,
-
-  UserCheck,
-  ChevronDown,
+  Gauge,
+  BarChart2,
+  BookOpen,
+  X,
+  Star,
+  Sun,
+  Moon,
+  Users,
 } from "lucide-react";
+
+const BASE = import.meta.env.BASE_URL + "screenshots/";
+
+// ── Theme helpers ──────────────────────────────────────────────────────────────
+
+function useTheme() {
+  const [dark, setDark] = useState(() => {
+    try { return localStorage.getItem("cp_theme") === "dark"; } catch { return false; }
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    try { localStorage.setItem("cp_theme", dark ? "dark" : "light"); } catch {}
+  }, [dark]);
+
+  return { dark, toggle: () => setDark(d => !d) };
+}
+
+// ── Design-system primitives ───────────────────────────────────────────────────
+
+function Browser({ url, img, alt = "" }: { url: string; img: string; alt?: string }) {
+  return (
+    <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-white/[0.07] shadow-2xl bg-white dark:bg-[#131B26]">
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-50 dark:bg-[#1A2330] border-b border-gray-200 dark:border-white/[0.07]">
+        <div className="flex gap-1.5 shrink-0">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+        </div>
+        <div className="flex-1 bg-gray-100 dark:bg-[#0B1117] rounded px-3 py-0.5 text-[11px] text-gray-400 dark:text-[#5E6B79] font-mono text-center truncate">
+          {url}
+        </div>
+        <div className="w-14 shrink-0" />
+      </div>
+      <div className="bg-white dark:bg-[#131B26]">
+        <img src={img} alt={alt} className="w-full block" />
+      </div>
+    </div>
+  );
+}
+
+function GradText({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="bg-clip-text text-transparent"
+      style={{ backgroundImage: "linear-gradient(135deg,#10B981,#14B8A6)" }}>
+      {children}
+    </span>
+  );
+}
+
+function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+  return (
+    <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase border mb-3 ${
+      light
+        ? "border-white/20 bg-white/10 text-green-200"
+        : "border-[#10B981]/20 dark:border-[#34D399]/20 text-[#047857] dark:text-[#6EE7B7]"
+    }`}
+      style={light ? {} : { background: "rgba(16,185,129,0.07)" }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full shrink-0"
+        style={{ background: light ? "#6EE7B7" : "#10B981" }} />
+      {children}
+    </span>
+  );
+}
+
+function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: React.ReactNode; sub?: string }) {
+  return (
+    <div className="max-w-2xl mx-auto text-center mb-14">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-[#E8EEF3] leading-tight mb-4">{title}</h2>
+      {sub && <p className="text-gray-500 dark:text-[#7B8794] text-lg leading-relaxed">{sub}</p>}
+    </div>
+  );
+}
+
+// ── Main component ─────────────────────────────────────────────────────────────
 
 export default function CyberPhishProduct() {
   const { getText, isRTL } = useLanguage();
-  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
+  const { dark, toggle } = useTheme();
+  const [activeFeature, setActiveFeature] = useState(0);
 
-  // ─── DATA ─────────────────────────────────────────────────────────────
-
-  const problems = [
+  const FEATURES = [
     {
-      icon: AlertTriangle,
-      statAr: "91%",
-      statEn: "91%",
-      titleAr: "الموظف هو الحلقة الأضعف",
-      titleEn: "Employees Are the Weakest Link",
-      bodyAr:
-        "91% من الهجمات تبدأ بخطأ بسيط من موظف، شخص واحد غير مدرّب ممكن يفتح الباب بالكامل للمهاجم",
-      bodyEn:
-        "91% of cyberattacks begin with human error, and one untrained employee is all it takes to open the door to attackers",
+      Icon: Sparkles,
+      title: getText("توليد الدورات بالذكاء الاصطناعي", "AI-Powered Course Generation"),
+      desc: getText("أنشئ دورات تدريبية كاملة — شرائح وسرد صوتي وفيديو — من نص واحد. متاح بالعربية والإنجليزية خلال دقائق.", "Generate complete training courses — slides, narration, and video — from a single prompt. Available in Arabic and English in minutes."),
+      url: "app.cyberphish.io / courses / ai-generate",
+      img: BASE + "step1-create-course.png",
     },
     {
-      icon: Clock,
-      statAr: "أيام",
-      statEn: "Days",
-      titleAr: "إعداد التدريب متعب وبطيء",
-      titleEn: "Building Training Is Slow and Costly",
-      bodyAr:
-        "تبغى تسوي دورة؟ بتقعد أيام تكتب وتصمم وتراجع قبل ما حتى أول موظف يشوفها",
-      bodyEn:
-        "Creating one training module manually takes days of writing, design and review before a single employee sees it",
+      Icon: Mail,
+      title: getText("محاكاة التصيد الاحتيالي", "Phishing Simulations"),
+      desc: getText("شغّل حملات تصيد واقعية ومحلية بقوالب مخصصة وصفحات هبوط واقعية لكشف مواطن المخاطر الحقيقية.", "Run targeted, realistic phishing campaigns with localized templates and custom landing pages to expose where risk actually lives."),
+      url: "app.cyberphish.io / simulations",
+      img: BASE + "step2-phishing-sim.png",
     },
     {
-      icon: TrendingDown,
-      statAr: "يومياً",
-      statEn: "Daily",
-      titleAr: "الهجمات قاعدة تزيد كل يوم",
-      titleEn: "Phishing Attacks Are Escalating Daily",
-      bodyAr:
-        "المهاجمين يطورون أساليبهم يومياً، وفريقك غالباً متأخر خطوة",
-      bodyEn:
-        "Attackers launch new campaigns every day while your team remains unprepared and exposed",
+      Icon: Zap,
+      title: getText("المختبرات التفاعلية", "Interactive Labs"),
+      desc: getText("تدريب عملي عبر البريد والويب والجوال وأسطح هجوم الأجهزة — قابل للتشغيل داخل المتصفح بدون إعداد مسبق.", "Hands-on practice across email, web, mobile, and desktop attack surfaces — playable in the browser without any setup."),
+      url: "app.cyberphish.io / labs",
+      img: BASE + "step3-interactive-labs.png",
+    },
+    {
+      Icon: Gauge,
+      title: getText("نقاط مخاطر الموظفين", "Employee Risk Scoring"),
+      desc: getText("درجات مخاطر مستمرة لكل موظف مبنية على سلوك المحاكاة ومشاركة التدريب — لا على نسب الإكمال فقط.", "Continuous per-employee risk scores based on simulation behavior and training engagement — not just completion rates."),
+      url: "app.cyberphish.io / dashboard",
+      img: BASE + "hero-dashboard.png",
+    },
+    {
+      Icon: BarChart2,
+      title: getText("التحليلات والتقارير", "Analytics & Reporting"),
+      desc: getText("رؤية المخاطر البشرية على مستوى الأقسام مع تقارير جاهزة للمدققين مرتبطة بضوابط ISO 27001 وNIST وPCI DSS.", "Department-level human risk visibility with audit-ready reports mapped to ISO 27001, NIST, and PCI DSS controls."),
+      url: "app.cyberphish.io / analytics",
+      img: BASE + "step4-analytics.png",
+    },
+    {
+      Icon: BookOpen,
+      title: getText("تكامل SCORM ونظام إدارة التعلم", "SCORM & LMS Integration"),
+      desc: getText("استورد محتوى تدريبيًا قائمًا أو صدّر محتوى سايبرفش إلى نظام إدارة التعلم المؤسسي. دعم كامل لـ SCORM 1.2 و2004.", "Import existing courseware or export CyberPhish content to your enterprise LMS. Full SCORM 1.2 and 2004 support."),
+      url: "app.cyberphish.io / courses",
+      img: BASE + "step1-create-course.png",
+    },
+    {
+      Icon: Mail,
+      title: getText("النشرات الإخبارية والتعزيز المستمر", "Newsletters & Reinforcement"),
+      desc: getText("أرسل نشرات داخلية بعلامتك تتضمن ملخصات التهديدات الشهرية واختبارات مراجعة لتعزيز الوعي بين الحملات.", "Send branded internal newsletters with monthly threat briefings and recap quizzes to reinforce awareness between campaigns."),
+      url: "app.cyberphish.io / newsletters",
+      img: BASE + "step2-phishing-sim.png",
+    },
+    {
+      Icon: Users,
+      title: getText("مجموعات الموظفين والتعلم المستهدف", "Employee Groups & Targeted Learning"),
+      desc: getText("نظّم الموظفين في مجموعات وأسند مسارات تدريب مستهدفة بناءً على الدور أو القسم أو درجة المخاطر.", "Organize employees into groups and assign targeted training paths based on role, department, or risk score."),
+      url: "app.cyberphish.io / groups",
+      img: BASE + "hero-dashboard.png",
     },
   ];
 
-  const trainingMethods = [
-    {
-      icon: Sparkles,
-      bg: "bg-green-50",
-      border: "border-green-200",
-      iconBg: "bg-green-100",
-      iconColor: "text-green-700",
-      accentColor: "text-green-600",
-      badgeBg: "bg-green-100 text-green-700",
-      labelAr: "ذكاء اصطناعي",
-      labelEn: "AI-Generated",
-      titleAr: "تدريب بالذكاء الاصطناعي",
-      titleEn: "AI-Generated Training",
-      descAr:
-        "بس اكتب الموضوع، والباقي علينا  دورة كاملة خلال ثواني",
-      descEn:
-        "Type a topic and get a complete training course in seconds: lessons, slides, narration and quizzes",
-      pointsAr: [
-        "إنشاء دروس وشرائح تلقائياً",
-        "تعليق صوتي + اختبار جاهز",
-        "جاهز للنشر خلال أقل من دقيقة",
-      ],
-      pointsEn: [
-        "Auto-generated lessons and slides",
-        "Voice narration and knowledge quizzes",
-        "Ready to publish in under a minute",
-      ],
-    },
-    {
-      icon: Upload,
-      bg: "bg-teal-50",
-      border: "border-teal-200",
-      iconBg: "bg-teal-100",
-      iconColor: "text-teal-700",
-      accentColor: "text-teal-600",
-      badgeBg: "bg-teal-100 text-teal-700",
-      labelAr: "SCORM",
-      labelEn: "SCORM",
-      titleAr: "رفع SCORM",
-      titleEn: "SCORM-Based Training",
-      descAr:
-        "عندك محتوى جاهز؟ ارفعه مباشرة وخله يشتغل ويتتبع بدون وجع راس",
-      descEn:
-        "Upload your content from Articulate or iSpring directly, and Cyberphish hosts, tracks and certifies it",
-      pointsAr: [
-        "تشغيل مباشر لحزم SCORM",
-        "تتبع + شهادات تلقائية",
-        "ربط مع المهام والمواعيد",
-      ],
-      pointsEn: [
-        "Instant hosting and playback of SCORM packages",
-        "Completion tracking and certificate issuance",
-        "Integrated with assignments and deadlines",
-      ],
-    },
-    {
-      icon: PenTool,
-      bg: "bg-emerald-50",
-      border: "border-emerald-200",
-      iconBg: "bg-emerald-100",
-      iconColor: "text-emerald-700",
-      accentColor: "text-emerald-600",
-      badgeBg: "bg-emerald-100 text-emerald-700",
-      labelAr: "يدوي",
-      labelEn: "Manual",
-      titleAr: "إنشاء يدوي",
-      titleEn: "Manual Training",
-      descAr:
-        "تبغى تحكم كامل؟ ابنِ دوراتك بنفسك بالطريقة اللي تناسبك",
-      descEn:
-        "Build your own courses and upload custom content that fits your company culture and training needs",
-      pointsAr: [
-        "رفع أي نوع محتوى",
-        "مسارات تدريب مرنة",
-        "تحكم كامل في كل التفاصيل",
-      ],
-      pointsEn: [
-        "Upload custom multimedia content",
-        "Design flexible learning paths",
-        "Full control over course structure",
-      ],
-    },
+
+  const USE_CASES = [
+    { tag: getText("الشركات الكبرى", "Enterprises"),           title: getText("خفض المخاطر البشرية على نطاق واسع", "Reduce human risk at scale"),      desc: getText("إدارة آلاف الموظفين عبر وحدات أعمال متعددة بنقاط مخاطر حسب الدور.", "Manage thousands of employees across business units with role based scoring."),               items: ["Multi tenant", "SSO and SCIM", "Audit ready reporting"] },
+    { tag: getText("فرق الموارد البشرية", "HR teams"),         title: getText("تأهيل يثبت في الذاكرة", "Onboarding that actually sticks"),           desc: getText("اجعل التوعية جزءًا من اليوم الأول للتأهيل بمسارات تعلم تُسند تلقائيًا.", "Bake awareness training into day one onboarding with auto assigned learning paths."),         items: ["Learning paths", "Certificates", "Progress tracking"] },
+    { tag: getText("أقسام تقنية المعلومات", "IT departments"), title: getText("تخفيف العبء على فرق الأمن", "Lighten the security ops load"),         desc: getText("أعطِ تقنية المعلومات صلاحية إطلاق الحملات والاستجابة دون طوابير تذاكر الأمن.", "Empower IT to launch campaigns and respond to risk without security ticket queues."),       items: ["Self serve campaigns", "Pre built templates", "Slack and Teams alerts"] },
+    { tag: getText("فرق الامتثال", "Compliance teams"),        title: getText("أدلة جاهزة لكل تدقيق", "Evidence for every audit"),                   desc: getText("صدّر تقارير جاهزة للمدققين مرتبطة بضوابط ISO 27001 وNIST وPCI DSS.", "Export auditor ready reports tied to ISO 27001, NIST and PCI DSS controls."),               items: ["Mapped controls", "Tamper proof logs", "PDPL and GDPR aligned"] },
+    { tag: getText("القطاع الحكومي", "Government"),             title: getText("سيادي وعربي أولًا", "Sovereign and Arabic first"),                    desc: getText("انشر على سحابات إقليمية بمحتوى عربي أصيل ودعم كامل لاتجاه RTL.", "Deploy on regional clouds with Arabic native content and full RTL support."),                items: ["Data residency", "Arabic UI and content", "Custom branding"] },
+    { tag: getText("الشركات الصغيرة", "SMBs"),                 title: getText("بمعايير الشركات الكبرى بحجم مناسب", "Enterprise grade, right sized"), desc: getText("ابدأ خلال أسبوع بقوالب مضبوطة مسبقًا حسب قطاعك.", "Get started in under a week with templates pre tuned for your industry."),                   items: ["Seven day onboarding", "Industry templates", "Flat per seat pricing"] },
   ];
 
-  const journeySteps = [
-    {
-      num: "01",
-      icon: Sparkles,
-      sectionBg: "bg-white",
-      numColor: "text-green-200",
-      badgeBg: "bg-green-100 text-green-700 border-green-200",
-      iconCardBg: "bg-gradient-to-br from-green-500 to-teal-500",
-      labelAr: "الخطوة الأولى",
-      labelEn: "Step One",
-      titleAr: "ابدأ التدريب",
-      titleEn: "Create Training",
-      descAr:
-        "اختر طريقتك: AI أو SCORM أو يدوي، وعيّن الدورات حسب الفريق أو الدور",
-      descEn:
-        "Choose your preferred method: AI, SCORM or manual, then assign courses to employees or teams by job role or risk level",
-      highlightsAr: ["3 طرق إنشاء", "تعيين حسب الفريق", "فوري أو مجدول"],
-      highlightsEn: ["3 flexible creation methods", "Assign by team or role", "Instant or scheduled launch"],
-      screenshot: "step1-create-course.png",
-    },
-    {
-      num: "02",
-      icon: Mail,
-      sectionBg: "bg-green-50",
-      numColor: "text-green-200",
-      badgeBg: "bg-teal-100 text-teal-700 border-teal-200",
-      iconCardBg: "bg-gradient-to-br from-teal-500 to-green-500",
-      labelAr: "الخطوة الثانية",
-      labelEn: "Step Two",
-      titleAr: "اختبرهم بتصيد",
-      titleEn: "Launch Phishing Simulations",
-      descAr:
-        "أرسل حملات تصيد واقعية وشوف مين ممكن ينخدع قبل ما يصير الهجوم الحقيقي",
-      descEn:
-        "Send realistic phishing campaigns via email and SMS to test employee readiness and identify weak points before attackers do",
-      highlightsAr: ["إيميل + SMS", "سيناريوهات حقيقية", "تسجيل تلقائي للتدريب"],
-      highlightsEn: ["Email and SMS phishing simulations", "Realistic and up-to-date scenarios", "Auto-enrollment in remedial training"],
-      screenshot: "step2-phishing-sim.png",
-    },
-    {
-      num: "03",
-      icon: UserCheck,
-      sectionBg: "bg-white",
-      numColor: "text-green-200",
-      badgeBg: "bg-emerald-100 text-emerald-700 border-emerald-200",
-      iconCardBg: "bg-gradient-to-br from-emerald-500 to-teal-500",
-      labelAr: "الخطوة الثالثة",
-      labelEn: "Step Three",
-      titleAr: "درّب بشكل ذكي",
-      titleEn: "Train Employees",
-      descAr:
-        "أي موظف يغلط، ينضاف مباشرة لتدريب علاجي بدون تدخل منك",
-      descEn:
-        "Deliver courses automatically based on simulation results, and employees who fail phishing tests are instantly enrolled in remedial training with no manual intervention",
-      highlightsAr: ["توصيل تلقائي", "تذكيرات", "متابعة فردية"],
-      highlightsEn: ["Automatic course delivery", "Reminders and deadlines", "Individual and team follow-up"],
-      screenshot: "step3-interactive-labs.png",
-    },
-    {
-      num: "04",
-      icon: BarChart2,
-      sectionBg: "bg-green-50",
-      numColor: "text-green-200",
-      badgeBg: "bg-green-100 text-green-700 border-green-200",
-      iconCardBg: "bg-gradient-to-br from-green-600 to-emerald-500",
-      labelAr: "الخطوة الرابعة",
-      labelEn: "Step Four",
-      titleAr: "تابع وطور",
-      titleEn: "Track & Improve",
-      descAr:
-        "راقب كل شيء من لوحة تحكم وحدة  واعرف مين يحتاج تدخل",
-      descEn:
-        "Monitor completion rates, risk scores and simulation results through a comprehensive real-time dashboard, and know who is ready and who needs immediate attention",
-      highlightsAr: ["لوحة تحكم مباشرة", "مخاطر لكل موظف", "تقارير جاهزة"],
-      highlightsEn: ["Real-time comprehensive dashboard", "Individual employee risk profiles", "Compliance-ready reports"],
-      screenshot: "step4-analytics.png",
-    },
+  const TESTIMONIALS = [
+    { tag: getText("خدمات مالية. 4,200 موظف.", "Financial services. 4,200 employees."), quote: getText("استبدلنا مزودَي توعية منفصلين بسايبرفش. خلال 90 يومًا انخفض معدل النقر على التصيد بنسبة 64٪. ولأول مرة لدينا رقم واحد يمكن الدفاع عنه أمام مجلس الإدارة.", "We replaced two separate awareness vendors with CyberPhish. Within 90 days our phishing click rate dropped by 64%, and for the first time we have a single defensible number to report to the board."), name: getText("فيصل المنصور", "Faisal Al Mansour"), role: getText("رئيس أمن المعلومات، مجموعة بنوك إقليمية", "CISO, regional banking group"), initials: "FM", featured: true },
+    { tag: "", quote: getText("ما حسم القرار لصالحنا هو جودة المحتوى العربي. الموظفون يتفاعلون مع التدريب فعلًا بدل المرور عليه فقط.", "The Arabic content quality is what closed it for us. Our employees actually engage with the training instead of just clicking through it."), name: getText("رنا حبيب", "Rana Habib"), role: getText("مديرة تقنية المعلومات، قطاع الخدمات اللوجستية", "Head of IT, logistics and supply chain"), initials: "RH", featured: false },
+    { tag: "", quote: getText("أثر التدقيق وربط الضوابط اختصرا جمع أدلة ISO 27001 من ثلاثة أسابيع إلى يوم واحد تقريبًا.", "The audit trail and control mapping cut our ISO 27001 evidence collection from three weeks down to about a day."), name: getText("جنى كريم", "Jana Karim"), role: getText("رئيسة الحوكمة، جهة حكومية", "GRC lead, public sector entity"), initials: "JK", featured: false },
   ];
 
-  const results = [
-    { statAr: "↓68%", statEn: "↓68%", labelAr: "انخفاض النقر على التصيد", labelEn: "Reduction in phishing click rates" },
-    { statAr: "10×", statEn: "10×", labelAr: "سرعة إنشاء الدورات", labelEn: "Faster course creation" },
-    { statAr: "100%", statEn: "100%", labelAr: "رؤية كاملة للمخاطر", labelEn: "Real-time employee risk visibility" },
-    { statAr: "∞", statEn: "∞", labelAr: "قابلية توسع بدون حدود", labelEn: "Scale without limits" },
-  ];
+  // shared card class
+  const card = "bg-white dark:bg-[#131B26] border border-gray-100 dark:border-white/[0.07] rounded-2xl shadow-sm";
 
-  const features = [
-    { icon: Sparkles, titleAr: "AI Course Builder", titleEn: "AI Course Generator", descAr: "دورة كاملة من فكرة واحدة خلال أقل من دقيقة", descEn: "Full courses from one topic in under 60 seconds" },
-    { icon: Upload, titleAr: "دعم SCORM", titleEn: "SCORM Support", descAr: "رفع وتشغيل وتتبع كامل", descEn: "Host, track and certify SCORM packages" },
-    { icon: PenTool, titleAr: "إنشاء يدوي", titleEn: "Manual Builder", descAr: "تحكم كامل بالمحتوى", descEn: "Build custom courses with multimedia content" },
-    { icon: Mail, titleAr: "محاكاة التصيد", titleEn: "Phishing Simulations", descAr: "هجمات واقعية لتجربة حقيقية", descEn: "Realistic, up-to-date email and SMS campaigns" },
-    { icon: Zap, titleAr: "أتمتة كاملة", titleEn: "Automated Campaigns", descAr: "تعيين + تذكير + متابعة تلقائية", descEn: "Assign, remind and escalate without manual work" },
-    { icon: BarChart2, titleAr: "تحليلات", titleEn: "Analytics Dashboard", descAr: "تشوف كل شيء لحظياً", descEn: "Real-time view of training, phishing and risk results" },
-    { icon: Users, titleAr: "مخاطر الموظفين", titleEn: "Employee Risk Tracking", descAr: "ملف لكل موظف", descEn: "Dynamic risk profile for every employee" },
-    { icon: Award, titleAr: "الشهادات", titleEn: "Certificate Management", descAr: "شهادات تلقائية جاهزة", descEn: "Auto-issued certificates and audit trails for compliance" },
-  ];
-
-
-  const faqs = [
-    {
-      qAr: "كيف يشتغل الذكاء الاصطناعي هنا؟",
-      qEn: "How does the AI course generator work?",
-      aAr: "بس تكتب موضوع، والنظام يولد لك دورة كاملة مع دروس وشرائح واختبار خلال أقل من دقيقة",
-      aEn: "You type a topic like 'password security' or 'social engineering' and the AI generates a complete training course with structured lessons, slides, voice narration and a knowledge quiz in under 60 seconds",
-    },
-    {
-      qAr: "أقدر أستخدم محتواي؟",
-      qEn: "Can I use my own existing content?",
-      aAr: "أكيد، تقدر تستخدم AI أو ترفع SCORM أو تبني بنفسك",
-      aEn: "Yes, Cyberphish supports three methods: AI generation, uploading SCORM packages from tools like Articulate or iSpring, and manual creation with custom content, and you choose what works for you",
-    },
-    {
-      qAr: "كيف التصيد يشتغل؟",
-      qEn: "How do phishing simulations work?",
-      aAr: "نرسل حملات وهمية، واللي ينخدع يدخل تدريب تلقائي",
-      aEn: "You launch realistic phishing campaigns via email or SMS, employees who click are automatically enrolled in immediate remedial training, and you can track every result in the dashboard",
-    },
-    {
-      qAr: "كيف أتابع الموظفين؟",
-      qEn: "How does employee progress tracking work?",
-      aAr: "كل موظف له ملف مخاطر واضح قدامك",
-      aEn: "Every employee has a live risk profile including course completion, quiz scores and phishing simulation results, managers see team-level dashboards while HR sees org-wide analytics",
-    },
-    {
-      qAr: "في تكامل مع Active Directory؟",
-      qEn: "Can I import users from Active Directory?",
-      aAr: "نعم، تقدر تستورد المستخدمين بسهولة",
-      aEn: "Yes, Cyberphish supports LDAP/Active Directory integration, and you can bulk-import users by OU or group with optional compliance enforcement through account locking",
-    },
-  ];
-
-  const partners = ["FinanceCore", "HealthSec", "RetailMax", "TechVault", "GovShield", "EduSafe"];
-
-  // ─── RENDER ───────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-[#0B1117] transition-colors duration-200" dir={isRTL ? "rtl" : "ltr"}>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          1. HERO
-      ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      {/* ── Theme toggle (floating) ── */}
+      <button
+        onClick={toggle}
+        aria-label="Toggle dark mode"
+        className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full flex items-center justify-center border shadow-lg transition-colors bg-white dark:bg-[#131B26] border-gray-200 dark:border-white/[0.12] text-gray-500 dark:text-[#A7B4C0] hover:border-[#10B981] hover:text-[#10B981]"
+      >
+        {dark ? <Sun size={16} /> : <Moon size={16} />}
+      </button>
 
-        {/* Background blobs */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-1/3 w-[700px] h-[500px] bg-green-200/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-teal-200/20 rounded-full blur-3xl" />
-          <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle, #16a34a 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-        </div>
+      {/* ── 1. HERO ── */}
+      <section className="relative overflow-hidden pt-24 pb-20 md:pt-32 md:pb-28 bg-white dark:bg-[#0B1117]">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 60% 40%, rgba(16,185,129,0.11) 0%, transparent 65%)" }} />
+        <div className="relative container mx-auto px-6 max-w-6xl">
+          <div className="grid lg:grid-cols-[5fr_7fr] gap-10 lg:gap-14 items-center">
 
-        {/* ── Hero Content ── */}
-        <div className="relative container mx-auto px-6 pt-14 pb-12 md:pt-20 md:pb-20 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-            {/* Copy side */}
-            <div className={`space-y-7 ${isRTL ? "text-right" : "text-left"}`}>
-
-              {/* ── Cyberphish brand mark ── */}
-              <div className={`flex items-center gap-2.5 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <img
-                  src={`${import.meta.env.BASE_URL}screenshots/cyberphish-icon.png`}
-                  alt="Cyberphish"
-                  className="w-10 h-10 rounded-xl object-cover shrink-0 shadow-md shadow-green-200"
-                />
-                <span className="text-2xl font-black text-gray-900 tracking-tight">Cyberphish</span>
-                <Badge className="bg-green-100 text-green-700 border border-green-200 text-[10px] px-2 py-0.5 font-semibold rounded-full hidden sm:inline-flex ms-1">
-                  🇸🇦 {getText("سعودي", "Saudi")}
-                </Badge>
-              </div>
-
-              <Badge className="inline-flex bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1.5 rounded-full font-medium">
-                {getText("منصة توعية أمنية مرنة فعلاً", "The Most Flexible Security Awareness Platform")}
-              </Badge>
-
-              <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-gray-900">
-                {isRTL ? (
-                  <>
-                    درّب فريقك، اختبره،{" "}
-                    <span className="bg-gradient-to-l from-green-500 to-teal-500 bg-clip-text text-transparent">
-                      واحمه بطريقتك
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Train, Test &{" "}
-                    <span className="bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent">
-                      Protect.
-                    </span>
-                    <br />
-                    <span className="text-3xl md:text-4xl text-gray-500 font-semibold">Three flexible ways.</span>
-                  </>
-                )}
+            <div className={`space-y-6 ${isRTL ? "text-right" : ""}`}>
+              <Eyebrow>{getText("منصة المخاطر البشرية. عربية أولًا.", "Human risk platform. Arabic first.")}</Eyebrow>
+              <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-extrabold leading-[1.1] text-gray-900 dark:text-[#E8EEF3] tracking-tight">
+                {getText("درّب فريقك ليصبح ", "Train your people to be the ")}
+                <GradText>{getText("خط الدفاع الأول ضد الهجمات السيبرانية.", "first line of cyber defense.")}</GradText>
               </h1>
-
-              <p className="text-lg text-gray-500 leading-relaxed">
-                {getText(
-                  "سايبرفيش يجمع لك التدريب بالذكاء الاصطناعي + SCORM + الإنشاء اليدوي في مكان واحد، عشان تحمي موظفينك من الهجمات بدون تعقيد",
-                  "Cyberphish brings together AI training, SCORM content and manual creation in one platform  so you can protect your team from cyber threats your way."
-                )}
+              <p className="text-gray-500 dark:text-[#7B8794] text-lg leading-relaxed">
+                {getText("تساعد سايبرفش فرق الأمن السيبراني في الشركات على محاكاة هجمات التصيد، وتنفيذ تدريبات توعية مدعومة بالذكاء الاصطناعي، وخفض المخاطر البشرية بشكل قابل للقياس. متاحة بالعربية والإنجليزية أو كليهما.", "CyberPhish helps enterprise security teams simulate phishing attacks, run AI generated awareness training, and measurably reduce human cyber risk. Available in Arabic, English, or both.")}
               </p>
-
               <div className={`flex flex-col sm:flex-row gap-3 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
-                <Button
-                  size="lg"
-                  className="bg-green-600 hover:bg-green-500 text-white px-8 h-14 rounded-xl shadow-lg shadow-green-200 font-semibold text-base transition-colors"
-                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}
+                <a href="/products/cyberphish/contact"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white transition-colors shadow-lg"
+                  style={{ background: "#10B981" }}
+                  onMouseOver={e => (e.currentTarget.style.background = "#059669")}
+                  onMouseOut={e => (e.currentTarget.style.background = "#10B981")}
                 >
-                  {isRTL
-                    ? <><ArrowIcon className="ms-2 h-4 w-4" />{getText("ابدأ مجاناً", "Get Started Free")}</>
-                    : <>{getText("ابدأ مجاناً", "Get Started Free")}<ArrowIcon className="ms-2 h-4 w-4" /></>}
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-green-300 text-green-700 hover:bg-green-50 bg-white px-8 h-14 rounded-xl font-semibold text-base transition-colors"
-                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/dashboard", "_blank")}
+                  {getText("أريد عرضًا توضيحيًا", "I Want a Demo")} →
+                </a>
+                <a href="https://cyberphish-staging.laravel.cloud/dashboard" target="_blank" rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-gray-200 dark:border-white/[0.12] text-gray-700 dark:text-[#A7B4C0] hover:bg-gray-50 dark:hover:bg-white/[0.04] font-semibold text-sm transition-colors"
                 >
-                  {getText(" ديمو", "Demo")}
-                </Button>
-              </div>
-
-              <div className={`flex flex-wrap gap-x-6 gap-y-2.5 text-sm text-gray-500 ${isRTL ? "justify-end" : ""}`}>
-                {[
-                  { ar: "تدريب يدوي أو بالذكاء الاصطناعي", en: "Manual or AI-generated courses" },
-                  { ar: "محاكاة تصيد تلقائية", en: "Automated phishing simulations" },
-                  { ar: "مصمم للشركات الكبيرة", en: "Built for enterprise" },
-                ].map((b) => (
-                  <span key={b.en} className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />
-                    {getText(b.ar, b.en)}
-                  </span>
-                ))}
+                  {getText("شاهد كيف يعمل", "See How It Works")}
+                </a>
               </div>
             </div>
 
-            {/* Hero screenshot */}
             <div className="relative">
-              <div className="absolute -inset-6 bg-gradient-to-br from-green-200/40 to-teal-200/30 rounded-3xl blur-3xl pointer-events-none" />
-              <div className="relative bg-white rounded-2xl border border-green-100 shadow-2xl shadow-green-200/50 overflow-hidden">
-                {/* Browser chrome strip */}
-                <div className="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-2.5 flex items-center gap-3">
-                  <div className="flex gap-1.5 shrink-0">
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/50" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/80" />
-                  </div>
-                  <div className="flex-1 bg-white/15 rounded px-2.5 py-0.5 text-xs text-white/70 font-mono truncate">
-                    app.cyberphish.io
-                  </div>
-                </div>
-                {/* Platform screenshot */}
-                <img
-                  src={`${import.meta.env.BASE_URL}screenshots/hero-dashboard.png`}
-                  alt="Cyberphish Platform Dashboard"
-                  className="w-full h-auto block"
-                />
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="flex justify-center pb-10">
-          <ChevronDown className="h-8 w-8 text-green-400 animate-bounce" />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          2THE PROBLEM
-      ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-red-50 text-red-600 border border-red-100 text-sm px-4 py-1 rounded-full">
-              {getText("المشكلة", "The Problem")}
-            </Badge>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-              {isRTL ? (
-                <>ليش فريقك فعلياً <span className="text-green-600">معرض للخطر؟</span></>
-              ) : (
-                <>Why does your team need <span className="text-green-600">protection now?</span></>
-              )}
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {problems.map((card) => (
-              <div key={card.titleEn} className="bg-white border border-gray-100 rounded-2xl p-8 space-y-4 shadow-sm hover:shadow-md hover:border-green-200 transition-all group">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center group-hover:bg-red-100 transition-colors">
-                    <card.icon className="h-6 w-6 text-red-500" />
-                  </div>
-                  <div className="text-4xl font-black text-green-500">{getText(card.statAr, card.statEn)}</div>
-                </div>
-                <h3 className="text-gray-900 font-bold text-lg leading-snug">{getText(card.titleAr, card.titleEn)}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{getText(card.bodyAr, card.bodyEn)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          3. THE SHIFT (Turning Point)
-      ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-gradient-to-br from-green-600 via-green-700 to-teal-600 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-white/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-teal-400/10 rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative container mx-auto px-4 max-w-4xl text-center space-y-8">
-          <Badge className="bg-white/20 text-white border border-white/30 text-sm px-5 py-1.5 rounded-full">
-            {getText("نقطة التحول", "The Turning Point")}
-          </Badge>
-
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-            {isRTL ? (
-              <>"طيب لو التدريب يصير <span className="text-green-200">تلقائي وسهل</span> ويتوسع معك؟"</>
-            ) : (
-              <>"What if training was <span className="text-green-200">automated, flexible,</span> and scalable?"</>
-            )}
-          </h2>
-
-          <p className="text-green-100 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            {getText(
-              "سايبرفيش يعطيك حرية كاملة، استخدم الطريقة اللي تناسبك أو امزج بينهم كلهم",
-              "Cyberphish doesn't lock you into one method, choose what works for your team or use all three together"
-            )}
-          </p>
-
-          <div className="flex justify-center pt-2">
-            <ChevronDown className="h-8 w-8 text-green-300 animate-bounce" />
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          4. TRAINING CREATION (Three Equal Methods)
-      ═══════════════════════════════════════════════════════════════ */}
-      <section id="features" className="bg-white py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1 rounded-full">
-              {getText("طرق إنشاء التدريب", "Training Creation Methods")}
-            </Badge>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-              {isRTL ? (
-                <>3 طرق  <span className="text-green-600">وانت تختار</span></>
-              ) : (
-                <>Three methods, <span className="text-green-600">One choice for you.</span></>
-              )}
-            </h2>
-            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              {getText(
-                "كل شركة لها أسلوبها، وسايبرفيش يعطيك المرونة كاملة",
-                "Every company has different needs, and Cyberphish gives you complete flexibility in how you create training content"
-              )}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {trainingMethods.map((method) => (
-              <div key={method.titleEn} className={`${method.bg} border ${method.border} rounded-2xl p-8 space-y-6 hover:shadow-lg transition-all`}>
-                {/* Header */}
-                <div className="flex items-start justify-between">
-                  <div className={`w-14 h-14 ${method.iconBg} rounded-2xl flex items-center justify-center`}>
-                    <method.icon className={`h-7 w-7 ${method.iconColor}`} />
-                  </div>
-                  <Badge className={`${method.badgeBg} border-0 text-xs font-bold px-3 py-1 rounded-full`}>
-                    {getText(method.labelAr, method.labelEn)}
-                  </Badge>
-                </div>
-
-                {/* Title */}
-                <div>
-                  <h3 className="text-gray-900 font-extrabold text-xl mb-2">{getText(method.titleAr, method.titleEn)}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{getText(method.descAr, method.descEn)}</p>
-                </div>
-
-                {/* Feature points */}
-                <ul className="space-y-2.5">
-                  {(isRTL ? method.pointsAr : method.pointsEn).map((point) => (
-                    <li key={point} className="flex items-start gap-2.5 text-sm text-gray-700">
-                      <CheckCircle className={`h-4 w-4 ${method.accentColor} shrink-0 mt-0.5`} />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Equal weight notice */}
-          <p className="text-center text-sm text-gray-400 mt-8 italic">
-            {getText(
-              "✦ كل الطرق متوفرة في جميع الباقات ✦",
-              "✦ All three methods are fully available on every plan ✦"
-            )}
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          5–8JOURNEY STEPS (1 → 2 → 3 → 4)
-      ═══════════════════════════════════════════════════════════════ */}
-
-      {/* Step progress indicator */}
-      <section id="how-it-works" className="bg-green-50 py-12 border-y border-green-100">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-green-600 mb-8">
-            {getText("رحلة سايبرفيش خطوة بخطوة", "The Cyberphish Journey from Start to Results")}
-          </p>
-          <div className="grid grid-cols-4 gap-2 relative">
-            <div className="hidden md:block absolute top-5 start-[12.5%] end-[12.5%] h-px bg-gradient-to-r from-green-300 via-green-400 to-green-300" />
-            {[
-              { numAr: "١", numEn: "1", labelAr: "ابدأ", labelEn: "Create" },
-              { numAr: "٢", numEn: "2", labelAr: "اختبر", labelEn: "Launch" },
-              { numAr: "٣", numEn: "3", labelAr: "درّب", labelEn: "Train" },
-              { numAr: "٤", numEn: "4", labelAr: "تابع", labelEn: "Track" },
-            ].map((s, i) => (
-              <div key={i} className="relative z-10 text-center space-y-2">
-                <div className="mx-auto w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-black text-sm shadow-md shadow-green-200">
-                  {getText(s.numAr, s.numEn)}
-                </div>
-                <p className="text-xs font-semibold text-green-700">{getText(s.labelAr, s.labelEn)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {journeySteps.map((step, index) => (
-        <section key={step.num} className={`${step.sectionBg} py-20 md:py-28`}>
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className={`grid md:grid-cols-2 gap-16 items-center ${index % 2 === 1 && !isRTL ? "md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1" : index % 2 === 1 && isRTL ? "md:[&>*:first-child]:order-1 md:[&>*:last-child]:order-2" : ""}`}>
-
-              {/* Content side */}
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <Badge className={`${step.badgeBg} border text-xs font-bold px-3 py-1 rounded-full`}>
-                    {getText(step.labelAr, step.labelEn)}
-                  </Badge>
-                </div>
-
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
-                  {getText(step.titleAr, step.titleEn)}
-                </h2>
-
-                <p className="text-gray-500 text-lg leading-relaxed">
-                  {getText(step.descAr, step.descEn)}
-                </p>
-
-                <ul className="space-y-3">
-                  {(isRTL ? step.highlightsAr : step.highlightsEn).map((h) => (
-                    <li key={h} className="flex items-center gap-3 text-gray-700 font-medium text-sm">
-                      <CheckCircle className="h-5 w-5 text-green-500 shrink-0" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Screenshot side */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(16,185,129,0.12) 0%, transparent 70%)" }} />
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-green-100/60 to-teal-100/40 rounded-3xl blur-2xl pointer-events-none" />
-                <div className="relative bg-white rounded-2xl border border-green-100 shadow-xl shadow-green-100/50 overflow-hidden">
-                  {/* Mini browser chrome */}
-                  <div className={`bg-gradient-to-r ${step.iconCardBg} px-3 py-2 flex items-center gap-2`}>
-                    <div className="flex gap-1 shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-white/30" />
-                      <div className="w-2 h-2 rounded-full bg-white/50" />
-                      <div className="w-2 h-2 rounded-full bg-white/80" />
-                    </div>
-                    <div className="flex-1 bg-white/15 rounded px-2 py-0.5 text-[10px] text-white/70 font-mono truncate">
-                      app.cyberphish.io
-                    </div>
-                    <span className="text-white/60 text-[10px] font-bold shrink-0">{step.num}</span>
+                <Browser url="app.cyberphish.io / dashboard" img={BASE + "hero-dashboard.png"} alt="CyberPhish dashboard" />
+                <div className={`absolute -top-5 ${isRTL ? "-left-4" : "-right-4"} ${card} px-4 py-3 flex items-center gap-3 animate-float`}>
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(16,185,129,0.1)", color: "#10B981" }}>
+                    <Shield size={15} />
                   </div>
-                  {/* Platform screenshot */}
-                  <img
-                    src={`${import.meta.env.BASE_URL}screenshots/${step.screenshot}`}
-                    alt={`${getText(step.titleAr, step.titleEn)} - Cyberphish`}
-                    className="w-full h-auto block"
-                  />
+                  <div>
+                    <div className="text-sm font-black bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg,#10B981,#14B8A6)" }}>
+                      {getText("انخفاض 68٪", "68% lower")}
+                    </div>
+                    <div className="text-[10px] text-gray-400 dark:text-[#5E6B79] mt-0.5 leading-tight">{getText("في معدل النقر خلال 90 يومًا", "Click through risk in 90 days")}</div>
+                  </div>
+                </div>
+                <div className={`absolute -bottom-5 ${isRTL ? "-right-4" : "-left-4"} ${card} px-4 py-3 flex items-center gap-3`} style={{ animation: "float 6s ease-in-out -2.5s infinite" }}>
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(16,185,129,0.1)", color: "#059669" }}>
+                    <Sparkles size={15} />
+                  </div>
+                  <div>
+                    <div className="text-sm font-black text-gray-900 dark:text-[#E8EEF3]">12,840</div>
+                    <div className="text-[10px] text-gray-400 dark:text-[#5E6B79] mt-0.5 leading-tight">{getText("موظف تم تدريبهم", "Employees trained")}</div>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          9. RESULTS
-      ═══════════════════════════════════════════════════════════════ */}
-      <section id="results" className="bg-gradient-to-br from-green-50 to-emerald-50 py-20 md:py-28 border-y border-green-100">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1 rounded-full">
-              {getText("النتائج", "Results")}
-            </Badge>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-              {isRTL ? (
-                <>أرقام <span className="text-green-600">تتكلم</span></>
-              ) : (
-                <>Results that are <span className="text-green-600">measurable and real.</span></>
-              )}
-            </h2>
+      {/* ── 2. LOGO ROW ── */}
+      <div className="border-y border-gray-100 dark:border-white/[0.07] py-10 bg-gray-50/60 dark:bg-[#0F1620]">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <p className="text-center text-[11px] font-semibold text-gray-400 dark:text-[#5E6B79] uppercase tracking-widest mb-7">
+            {getText("تثق بها فرق الأمن والامتثال في منطقة الشرق الأوسط وخارجها", "Trusted by security and compliance teams across MENA and beyond")}
+          </p>
+          <div className={`flex flex-wrap justify-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}>
+            {["AURION", "MIRAJ", "Halcyon", "NORTHWAY", "Vanta·co", "QSWRA"].map(l => (
+              <span key={l} className="text-xs font-black text-gray-300 dark:text-[#5E6B79] tracking-widest">{l}</span>
+            ))}
           </div>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {results.map((r) => (
-              <div key={r.labelEn} className="bg-white rounded-2xl border border-green-100 p-8 text-center shadow-sm hover:shadow-md hover:border-green-300 transition-all space-y-3">
-                <div className="text-5xl font-black text-green-600">{getText(r.statAr, r.statEn)}</div>
-                <p className="text-sm text-gray-600 font-medium leading-snug">{getText(r.labelAr, r.labelEn)}</p>
+      {/* ── 3. RATINGS ── */}
+      <div className="border-b border-gray-100 dark:border-white/[0.07] py-8 bg-white dark:bg-[#0B1117]">
+        <div className="container mx-auto px-6 max-w-3xl">
+          <div className={`flex flex-col sm:flex-row justify-center gap-8 items-center ${isRTL ? "sm:flex-row-reverse" : ""}`}>
+            {[{ score: "4.8", src: "G2", label: getText("على G2", "on G2") }, { score: "4.7", src: "Capterra", label: getText("على Capterra", "on Capterra") }, { score: "4.9", src: "Gartner", label: "Peer Insights" }].map(c => (
+              <div key={c.src} className={`flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
+                <span className="text-2xl font-black text-gray-900 dark:text-[#E8EEF3]">{c.score}</span>
+                <div className="w-px h-9 bg-gray-200 dark:bg-white/[0.07]" />
+                <div>
+                  <div className="flex gap-0.5 mb-1">{Array(5).fill(0).map((_, i) => <Star key={i} size={11} className="fill-[#10B981] text-[#10B981]" />)}</div>
+                  <div className="text-xs text-gray-400 dark:text-[#5E6B79]">{c.src} · {c.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── 4. PROBLEM ── */}
+      <section className="py-24 md:py-32 bg-white dark:bg-[#0B1117]">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <SectionHead
+            eyebrow={getText("تحدي المخاطر البشرية", "The human risk problem")}
+            title={<>{getText("جدرانك النارية تعمل. لكن ", "Your firewalls are working. ")}<GradText>{getText("موظفيك أصبحوا المحيط الجديد.", "Your people are the new perimeter.")}</GradText></>}
+            sub={getText("تطوّرت أدوات الأمن أسرع من وعي الموظفين. المهاجمون يعرفون ذلك ويستهدفون موظفيك أولًا. لا تزال معظم الاختراقات تبدأ بنقرة واحدة.", "Security tooling has matured faster than human awareness. Attackers know it, and they target your employees first. Most breaches still start with a single click.")}
+          />
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              { big: getText("82٪", "82%"), title: getText("من الاختراقات يتضمن عنصرًا بشريًا", "of breaches involve a human element"), text: getText("التصيد والهندسة الاجتماعية وسرقة بيانات الاعتماد والخطأ البشري لا تزال نقاط الدخول الأبرز للمهاجمين.", "Phishing, social engineering, stolen credentials and human error remain the dominant entry point for attackers.") },
+              { big: getText("4.9M$", "$4.9M"), title: getText("متوسط تكلفة الاختراق الواحد", "average cost of a single breach"), text: getText("في منطقة الشرق الأوسط، تستمر تكلفة الحوادث بالارتفاع سنويًا مقابل ميزانيات أمنية محدودة.", "Across MENA the cost per incident continues to rise year over year against constrained security budgets.") },
+              { big: getText("11 دقيقة", "11 min"), title: getText("متوسط زمن النقر على رابط تصيد", "median click time on phishing"), text: getText("ينقر الموظفون على الروابط الخبيثة خلال دقائق من وصولها. الكشف وحده لا يكفي. السلوك هو ما يجب أن يتغير.", "Employees click malicious links within minutes of receipt. Detection alone is not enough. Behavior has to change.") },
+            ].map((s, i) => (
+              <div key={i} className={`${card} p-8 hover:shadow-md hover:border-green-100 dark:hover:border-[#34D399]/20 transition-all`}>
+                <div className="text-5xl font-black mb-3 bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg,#10B981,#14B8A6)" }}>{s.big}</div>
+                <div className="font-bold text-gray-800 dark:text-[#E8EEF3] text-sm mb-2">{s.title}</div>
+                <p className="text-gray-500 dark:text-[#7B8794] text-sm leading-relaxed">{s.text}</p>
+                <div className="mt-4 text-[10px] text-gray-300 dark:text-[#5E6B79] uppercase tracking-wide">{getText("مرجع قطاعي. أرقام توضيحية.", "Industry benchmark. Illustrative.")}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          10. FEATURES
-      ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-green-100 text-green-700 border border-green-200 text-sm px-4 py-1 rounded-full">
-              {getText("مميزات المنصة", "Platform Features")}
-            </Badge>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-              {isRTL ? (
-                <>كل اللي تحتاجه  <span className="text-green-600">بدون تعقيد</span></>
-              ) : (
-                <>Everything you need, <span className="text-green-600">Nothing you don't.</span></>
-              )}
-            </h2>
+      {/* ── 5. WHY FAILS ── */}
+      <section className="py-24 md:py-32 bg-gray-50 dark:bg-[#0F1620]">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <SectionHead
+            eyebrow={getText("لماذا تفشل برامج التوعية التقليدية", "Why traditional awareness training fails")}
+            title={getText("صناديق الامتثال لا تغيّر السلوك.", "Compliance checkboxes do not change behavior.")}
+            sub={getText("صُممت معظم برامج التوعية للمدققين لا للموظفين. سايبرفش مبنية لتغيير سلوكي قابل للقياس مدعوم بأدلة من المحاكاة.", "Most awareness programs were built for auditors, not employees. CyberPhish is built for measurable behavior change, backed by simulation evidence.")}
+          />
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { t: getText("إرهاق الامتثال السنوي", "Annual compliance fatigue"),                 d: getText("وحدات SCORM السنوية ترضي المدققين، لكنها تترك الموظفين غير مكترثين وغير مستعدين بعد ثلاثة أشهر.", "Once a year SCORM modules satisfy auditors but leave employees disengaged and unprepared by month three.") },
+              { t: getText("محتوى عام بالإنجليزية فقط", "Generic, English only content"),         d: getText("نادرًا ما يعكس المحتوى الجاهز السياق المحلي أو دقائق اللغة أو التهديدات الخاصة بقطاعك.", "Off the shelf training rarely reflects local context, language nuance, or the specific threats your industry faces.") },
+              { t: getText("غياب التغيير السلوكي القابل للقياس", "No measurable behavior change"), d: getText("نسب الإكمال ليست تخفيضًا للمخاطر. بدون بيانات محاكاة لن تستطيع إثبات أن التوعية تعمل.", "Completion rates are not risk reduction. Without simulation data, you cannot prove security awareness is working.") },
+              { t: getText("منفصل عن الهجمات الحقيقية", "Disconnected from real attacks"),         d: getText("التدريب ومحاكاة التصيد يعيشان في أدوات منفصلة، فلا يمكن ربط حدث نقر بنتيجة تعلّم.", "Training and phishing simulation live in separate tools, so teams cannot tie a click event to a learning outcome.") },
+            ].map((f, i) => (
+              <div key={i} className={`${card} p-7 flex gap-4`} style={{ borderColor: undefined }}>
+                <div className="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <X size={13} className="text-red-500" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-[#E8EEF3] text-sm mb-1.5">{f.t}</h4>
+                  <p className="text-gray-500 dark:text-[#7B8794] text-sm leading-relaxed">{f.d}</p>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
+      {/* ── 6. FLOW ── */}
+      <section className="py-24 md:py-32 bg-white dark:bg-[#0B1117]">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <SectionHead
+            eyebrow={getText("دورة سايبرفش", "The CyberPhish loop")}
+            title={<>{getText("منصة موحدة واحدة. ", "One unified platform. ")}<GradText>{getText("أربع خطوات متواصلة.", "Four continuous steps.")}</GradText></>}
+            sub={getText("التوعية والمحاكاة والتحليلات مصممة لتعمل كحلقة مغلقة واحدة، لا كثلاث أدوات منفصلة.", "Awareness, simulation, and analytics designed to work as a single closed loop instead of three disconnected tools.")}
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {features.map((f) => (
-              <div key={f.titleEn} className="group bg-green-50 border border-green-100 rounded-2xl p-6 space-y-4 hover:bg-white hover:shadow-md hover:border-green-300 transition-all">
-                <div className="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center group-hover:bg-green-200 transition-colors">
-                  <f.icon className="h-5 w-5 text-green-700" />
-                </div>
-                <h3 className="text-gray-900 font-bold text-sm leading-snug">{getText(f.titleAr, f.titleEn)}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{getText(f.descAr, f.descEn)}</p>
+            {[
+              { n: "01", t: getText("المحاكاة", "Simulate"), d: getText("نفّذ حملات تصيد واقعية ومحلية لتكشف عن مواطن المخاطر الحقيقية في مؤسستك.", "Run realistic, localized phishing campaigns to expose risk where it actually lives in your organization.") },
+              { n: "02", t: getText("التدريب", "Train"),     d: getText("أسند تلقائيًا دورات قصيرة وتمارين تفاعلية لكل من نقر على المحاكاة.", "Auto assign AI generated micro courses and interactive labs to anyone who clicked.") },
+              { n: "03", t: getText("القياس", "Measure"),   d: getText("قِس المخاطر البشرية لكل قسم ودور وأقدمية، بتقارير جاهزة للمدققين.", "Quantify human cyber risk by department, role, and seniority, with auditor ready reporting.") },
+              { n: "04", t: getText("التحسين", "Improve"),  d: getText("كرّر ربع سنوي. شاهد درجة المخاطر تنخفض، ثم أثبت ذلك للإدارة.", "Iterate quarterly. Watch your organization's risk score drop, then prove it to the board.") },
+            ].map(s => (
+              <div key={s.n} className={`${card} p-7 hover:shadow-md hover:border-green-100 dark:hover:border-[#34D399]/20 transition-all group`}>
+                <div className="text-4xl font-black text-gray-100 dark:text-[#1A2330] group-hover:text-green-100 dark:group-hover:text-[#1A2330] transition-colors mb-5 tabular-nums">{s.n}</div>
+                <h4 className="font-bold text-gray-900 dark:text-[#E8EEF3] mb-2">{s.t}</h4>
+                <p className="text-gray-500 dark:text-[#7B8794] text-sm leading-relaxed">{s.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          12. PARTNERS & CLIENTS
-      ═══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white border-y border-green-50 py-16 md:py-20">
-        <div className="container mx-auto px-4 max-w-5xl text-center">
-          <p className="text-sm font-bold text-gray-900 mb-2">
-            {getText("عملاؤنا وشركاؤنا", "Our Partners & Clients")}
-          </p>
-          <p className="text-xs text-gray-400 mb-10">
-            {getText("شركات كثيرة تعتمد علينا", "Trusted by leading organizations worldwide")}
-          </p>
+      {/* ── 7. FEATURES ACCORDION ── */}
+      <section className="py-24 md:py-32 bg-white dark:bg-[#0B1117]">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <SectionHead
+            eyebrow={getText("قدرات المنصة الأساسية", "Core platform capabilities")}
+            title={<>{getText("مبنية للنتائج الأمنية ", "Built for the security outcomes ")}<GradText>{getText("التي تهم فعلًا.", "that matter.")}</GradText></>}
+            sub={getText("كل وحدة مصممة حول نتيجة عمل قابلة للقياس. استخدمها معًا أو ابدأ بما تحتاجه.", "Each module is designed around a measurable business outcome. Use them together or start with just what you need.")}
+          />
+          <div className={`grid lg:grid-cols-[380px_1fr] gap-8 items-start ${isRTL ? "[&>*:first-child]:lg:order-2 [&>*:last-child]:lg:order-1" : ""}`}>
+            {/* Left: accordion navigation */}
+            <div className="space-y-1.5">
+              {FEATURES.map((f, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveFeature(i)}
+                  className={`w-full ${isRTL ? "text-right" : "text-left"} px-4 py-3.5 rounded-xl transition-all flex items-start gap-3.5 group ${
+                    i === activeFeature
+                      ? "border shadow-sm"
+                      : "border border-transparent hover:bg-gray-50 dark:hover:bg-[#131B26]"
+                  }`}
+                  style={i === activeFeature ? { background: "rgba(16,185,129,0.06)", borderColor: "rgba(16,185,129,0.25)" } : {}}
+                >
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-colors"
+                    style={i === activeFeature
+                      ? { background: "#10B981", color: "#fff" }
+                      : { background: "rgba(0,0,0,0.05)", color: "#9CA3AF" }}
+                  >
+                    <f.Icon size={15} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className={`font-semibold text-sm transition-colors ${
+                      i === activeFeature
+                        ? "text-gray-900 dark:text-[#E8EEF3]"
+                        : "text-gray-500 dark:text-[#7B8794] group-hover:text-gray-700 dark:group-hover:text-[#A7B4C0]"
+                    }`}>
+                      {f.title}
+                    </div>
+                    {i === activeFeature && (
+                      <p className="text-xs text-gray-500 dark:text-[#7B8794] leading-relaxed mt-1.5">{f.desc}</p>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {partners.map((name) => (
-              <div key={name} className="px-3 py-5 bg-green-50 rounded-xl border border-green-100 flex items-center justify-center hover:border-green-300 hover:bg-white transition-all">
-                <span className="text-xs font-extrabold text-gray-400 tracking-wide">{name}</span>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-8 text-gray-400 text-xs max-w-md mx-auto">
-            {getText(
-              "مئات الفرق تستخدم سايبرفيش يومياً",
-              "Hundreds of security-conscious teams rely on Cyberphish to protect their organizations"
-            )}
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          13. CTA
-      ═══════════════════════════════════════════════════════════════ */}
-      <section id="contact" className="bg-green-50 py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-green-500 via-green-600 to-teal-500 px-8 py-16 md:py-20 text-center shadow-2xl shadow-green-300/40">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-white/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[300px] h-[200px] bg-teal-400/20 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="relative space-y-6">
-              <Badge className="bg-white/20 text-white border border-white/30 text-sm px-5 py-1.5 rounded-full">
-                {getText("الهجوم الجاي ممكن يكون عليك", "Your next attack is already planned")}
-              </Badge>
-
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
-                {isRTL ? (
-                  <>جاهزين <span className="text-green-100">ولا لا؟</span></>
-                ) : (
-                  <>Is your team <span className="text-green-100">ready?</span></>
-                )}
-              </h2>
-
-              <p className="text-green-50 text-lg max-w-xl mx-auto leading-relaxed">
-                {getText(
-                  "ابدأ اليوم  بدون تعقيد وبدون بطاقة ائتمان",
-                  "Start protecting your company today, no technical expertise needed, no credit card"
-                )}
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-                <Button size="lg" className="bg-white text-green-700 hover:bg-green-50 px-8 h-14 rounded-xl font-bold text-base shadow-lg transition-colors"
-                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/register", "_blank")}>
-                  {getText("ابدأ الآن", "Start Now")}
-                </Button>
-                <Button size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 px-8 h-14 rounded-xl font-semibold text-base transition-colors"
-                  onClick={() => window.open("https://cyberphish-staging.laravel.cloud/dashboard", "_blank")}>
-                  {getText("احجز ديمو", "Book a Demo")}
-                </Button>
+            {/* Right: live screenshot preview */}
+            <div className="relative lg:sticky lg:top-24">
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(16,185,129,0.09) 0%, transparent 70%)" }} />
+              <div className="relative">
+                <Browser url={FEATURES[activeFeature].url} img={FEATURES[activeFeature].img} />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          14. FAQ
-      ═══════════════════════════════════════════════════════════════ */}
-      <section id="faq" className="bg-white py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-              {getText("أسئلة ممكن تجيك", "Frequently Asked Questions")}
-            </h2>
-          </div>
 
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <AccordionItem key={idx} value={`faq-${idx}`} className="border border-green-100 bg-green-50/30 rounded-xl px-6 data-[state=open]:border-green-300 data-[state=open]:bg-green-50 transition-colors">
-                <AccordionTrigger className="font-semibold text-gray-900 hover:no-underline py-5 text-sm md:text-base text-start">
-                  {getText(faq.qAr, faq.qEn)}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-500 leading-relaxed pb-5 text-sm text-start">
-                  {getText(faq.aAr, faq.aEn)}
-                </AccordionContent>
-              </AccordionItem>
+      {/* ── 13. USE CASES ── */}
+      <section className="py-24 md:py-32 bg-gray-50 dark:bg-[#0F1620]">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <SectionHead
+            eyebrow={getText("مصممة لكل فريق", "Built for every team")}
+            title={getText("من قسم تقنية بشخصين إلى مؤسسات تضم 50 ألف موظف.", "From two person IT to fifty thousand employee enterprises.")}
+            sub={getText("تتوسع سايبرفش مع نضج برنامج الأمن لديك وتتكيف مع من يدير البرنامج فعليًا.", "CyberPhish scales with your security maturity and adapts to who is running the program.")}
+          />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {USE_CASES.map((uc, i) => (
+              <div key={i} className={`${card} p-7 hover:shadow-md hover:border-green-200 dark:hover:border-[#34D399]/20 transition-all`}>
+                <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "#10B981" }}>{uc.tag}</div>
+                <h4 className="font-bold text-gray-900 dark:text-[#E8EEF3] mb-2">{uc.title}</h4>
+                <p className="text-gray-500 dark:text-[#7B8794] text-sm leading-relaxed mb-4">{uc.desc}</p>
+                <ul className="space-y-1">
+                  {uc.items.map((item, j) => (
+                    <li key={j} className={`text-xs text-gray-400 dark:text-[#5E6B79] flex items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
+                      <span className="w-1 h-1 rounded-full bg-green-400 shrink-0" />{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 14. TESTIMONIALS ── */}
+      <section className="py-24 md:py-32 bg-green-50 dark:bg-[#0F1620]">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <SectionHead
+            eyebrow={getText("قصص من الميدان", "Stories from the field")}
+            title={getText("فرق أمن استبدلت مزود التوعية القديم بسايبرفش.", "Security teams who replaced their old awareness vendor.")}
+          />
+          <div className="grid md:grid-cols-3 gap-5">
+            {TESTIMONIALS.map((t, i) => (
+              <div key={i} className={`rounded-2xl p-7 flex flex-col gap-5 shadow-sm ${
+                t.featured
+                  ? "bg-white dark:bg-[#131B26] border-2 border-green-200 dark:border-[#34D399]/30"
+                  : `${card}`
+              }`}>
+                {t.tag && <div className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10B981" }}>{t.tag}</div>}
+                <p className={`text-gray-700 dark:text-[#A7B4C0] leading-relaxed flex-1 ${t.featured ? "text-base" : "text-sm"} ${isRTL ? "text-right" : ""}`}>"{t.quote}"</p>
+                <div className={`flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+                  <div className="w-9 h-9 rounded-full text-white text-xs font-black flex items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#10B981,#14B8A6)" }}>
+                    {t.initials}
+                  </div>
+                  <div className={isRTL ? "text-right" : ""}>
+                    <div className="text-sm font-bold text-gray-900 dark:text-[#E8EEF3]">{t.name}</div>
+                    <div className="text-xs text-gray-400 dark:text-[#5E6B79]">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 15. FINAL CTA ── */}
+      <section className="py-24 md:py-32 dark:border-t dark:border-white/[0.07]" style={{ background: "linear-gradient(135deg,#064e3b 0%,#065f46 50%,#0f766e 100%)" }}>
+        <div className="container mx-auto px-6 max-w-3xl text-center">
+          <Eyebrow light>{getText("جاهزون حين تكون جاهزًا", "Ready when you are")}</Eyebrow>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
+            {getText("حوّل أضعف طبقاتك إلى ", "Turn your weakest layer into your ")}
+            <span className="text-green-200">{getText("أقوى خط دفاع.", "strongest defense.")}</span>
+          </h2>
+          <p className="text-green-100/80 text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+            {getText("شاهد عرضًا لمدة 30 دقيقة على بياناتك. دون التزام ودون شرائح تقديمية.", "See a 30 minute walkthrough of CyberPhish on your own data. No commitment, no slide deck demo.")}
+          </p>
+          <div className={`flex flex-col sm:flex-row gap-3 justify-center ${isRTL ? "sm:flex-row-reverse" : ""}`}>
+            <a href="https://cyberphish-staging.laravel.cloud/register" target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white transition-colors shadow-lg"
+              style={{ background: "#10B981" }}
+              onMouseOver={e => (e.currentTarget.style.background = "#059669")}
+              onMouseOut={e => (e.currentTarget.style.background = "#10B981")}
+            >
+              {getText("اطلب عرضًا توضيحيًا", "Book a demo")} →
+            </a>
+            <a href="https://cyberphish-staging.laravel.cloud/dashboard" target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/25 bg-white/10 text-white hover:bg-white/20 font-semibold text-sm transition-colors"
+            >
+              {getText("تحدث مع المبيعات", "Talk to sales")}
+            </a>
+          </div>
+          <div className={`flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-green-200/50 justify-center mt-7 ${isRTL ? "flex-row-reverse" : ""}`}>
+            <span>SOC 2 Type II</span><span className="opacity-40">·</span>
+            <span>ISO 27001</span><span className="opacity-40">·</span>
+            <span>EN / عربي</span>
+          </div>
         </div>
       </section>
 

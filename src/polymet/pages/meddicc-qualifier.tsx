@@ -1,24 +1,12 @@
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/polymet/components/language-context";
 import { jsPDF } from "jspdf";
-import {
-  Brain,
-  FileDown,
-  AlertTriangle,
-  ArrowRight,
-  BarChart3,
-} from "lucide-react";
+import { FileDown } from "lucide-react";
 import { LOGO_ICON } from "./meddicc-logos";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Status = "not" | "progress" | "confirmed";
-
-interface AiResults {
-  summary: string;
-  risks: string[];
-  actions: string[];
-}
 
 interface MeddiccItem {
   key: string;
@@ -174,10 +162,6 @@ export default function MeddiccQualifier() {
   );
   const [notes, setNotes] = useState<string[]>(Array(7).fill(""));
 
-  // AI state
-  const [aiResults, setAiResults] = useState<AiResults | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-
   // Toast
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
@@ -248,64 +232,6 @@ export default function MeddiccQualifier() {
     setTimeout(() => setToastMsg(null), 3500);
   };
 
-
-  // ── AI analysis ─────────────────────────────────────────────────────────────
-
-  const buildPrompt = (): string => {
-    let md = "";
-    MEDDICC_ITEMS.forEach((item, idx) => {
-      md += `\n${item.key} - ${item.titleEn} (Weight:${item.weight}%, Status:${statuses[idx]}):\n${notes[idx] || "Not filled in"}\n`;
-    });
-    const lang = language === "ar" ? "Respond in Arabic." : "Respond in English.";
-    return `You are a B2B sales coach for CyberPhish, a cybersecurity awareness and phishing simulation platform. Analyze this deal. ${lang}
-
-DEAL: Company:${company || "Unknown"}, Value:$${dealValue || "Not specified"}, Stage:${dealStage || "Not specified"}, Contact:${contact || "Not specified"}, Close:${closeDate || "Not specified"}
-MEDDICC:${md}
-CYBERPHISH: All-in-one cybersecurity awareness platform (employee training, phishing simulations, AI course creation, SCORM, risk scoring, labs, analytics, compliance reporting).
-
-Respond ONLY with valid JSON — no markdown, no preamble:
-{"summary":"2-3 sentence deal health summary","risks":["Risk 1 with detail","Risk 2 with detail","Risk 3 with detail"],"actions":["Action 1 with clear instruction","Action 2 with clear instruction","Action 3 with clear instruction"]}`;
-  };
-
-  const handleAnalyze = async () => {
-    const key = import.meta.env.VITE_ANTHROPIC_API_KEY as string | undefined;
-    if (!key) {
-      showToast(getText("خدمة التحليل غير متوفرة حالياً", "AI analysis is currently unavailable"));
-      return;
-    }
-    setIsAnalyzing(true);
-    setAiResults(null);
-    try {
-      const resp = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": key,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-allow-browser": "true",
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          messages: [{ role: "user", content: buildPrompt() }],
-        }),
-      });
-      const data = await resp.json();
-      if (data.error) throw new Error(data.error.message);
-      const raw = data.content
-        .map((b: { type: string; text?: string }) => b.text ?? "")
-        .join("");
-      setAiResults(JSON.parse(raw.replace(/```json|```/g, "").trim()));
-    } catch {
-      showToast(
-        getText(
-          "تعذّر التحليل. تحقق من مفتاح API وحاول مجدداً.",
-          "Analysis failed. Check your API key and try again."
-        )
-      );
-    }
-    setIsAnalyzing(false);
-  };
 
   // ── PDF export ──────────────────────────────────────────────────────────────
 
@@ -754,81 +680,6 @@ Respond ONLY with valid JSON — no markdown, no preamble:
     });
     addFooter(3);
 
-    // ── Page 4: AI analysis (if available) ──
-    if (aiResults) {
-      doc.addPage();
-      y = 50;
-      doc.setFillColor(...GREEN);
-      doc.rect(ml, y, cw, 26, "F");
-      doc.setTextColor(...WHITE);
-      doc.setFontSize(9);
-      doc.setFont("helvetica", "bold");
-      doc.text("AI DEAL ANALYSIS", ml + 10, y + 17);
-      y += 34;
-
-      // Summary
-      doc.setFillColor(...DARK);
-      doc.rect(ml, y, cw, 20, "F");
-      doc.setTextColor(...WHITE);
-      doc.setFontSize(9);
-      doc.setFont("helvetica", "bold");
-      doc.text("Deal Health Summary", ml + 10, y + 13);
-      y += 26;
-      doc.setFillColor(...GRAY);
-      const sumLines = doc.splitTextToSize(aiResults.summary, cw - 20);
-      const sumH = sumLines.length * 14 + 16;
-      doc.roundedRect(ml, y, cw, sumH, 4, 4, "F");
-      doc.setFontSize(9);
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(...DARK);
-      sumLines.forEach((line: string, li: number) => {
-        doc.text(line, ml + 10, y + 14 + li * 14);
-      });
-      y += sumH + 16;
-
-      // Risks + Actions (two columns)
-      const halfW = (cw - 12) / 2;
-      const sections = [
-        { title: "Deal Risks", items: aiResults.risks, color: LIGHT_GREEN, bg: BG_LIGHT },
-        { title: "Next Best Actions", items: aiResults.actions, color: GREEN, bg: [220, 252, 231] as [number, number, number] },
-      ];
-      const colStarts = [ml, ml + halfW + 12];
-      const secHeights = sections.map((sec) => {
-        let sh = 28;
-        sec.items.forEach((item) => {
-          sh += doc.splitTextToSize(item, halfW - 28).length * 13 + 10;
-        });
-        return sh;
-      });
-      const maxH = Math.max(...secHeights);
-      sections.forEach((sec, si) => {
-        const sx = colStarts[si];
-        doc.setFillColor(...sec.bg);
-        doc.roundedRect(sx, y, halfW, maxH, 5, 5, "F");
-        doc.setFillColor(...sec.color);
-        doc.roundedRect(sx, y, halfW, 20, 5, 5, "F");
-        doc.roundedRect(sx, y + 10, halfW, 10, "F");
-        doc.setTextColor(...WHITE);
-        doc.setFontSize(9);
-        doc.setFont("helvetica", "bold");
-        doc.text(sec.title, sx + 10, y + 13);
-        let iy = y + 28;
-        sec.items.forEach((item) => {
-          doc.setFillColor(...sec.color);
-          doc.circle(sx + 12, iy - 1, 3, "F");
-          const iLines = doc.splitTextToSize(item, halfW - 28);
-          doc.setFontSize(9);
-          doc.setFont("helvetica", "normal");
-          doc.setTextColor(...DARK);
-          iLines.forEach((l2: string, li2: number) => {
-            doc.text(l2, sx + 20, iy + li2 * 13);
-          });
-          iy += iLines.length * 13 + 10;
-        });
-      });
-      addFooter(4);
-    }
-
     const filename = `CyberPhish_MEDDICC_${(coy.replace(/\s+/g, "_"))}_${today.replace(/ /g, "_")}.pdf`;
     doc.save(filename);
     showToast(`PDF saved: ${filename}`);
@@ -1036,135 +887,15 @@ Respond ONLY with valid JSON — no markdown, no preamble:
         </div>
 
         {/* ── Action buttons ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <button
-            onClick={handleAnalyze}
-            disabled={isAnalyzing}
-            className={`flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-semibold text-sm transition-colors ${
-              isAnalyzing
-                ? "bg-green-400 text-white cursor-not-allowed"
-                : "bg-green-600 hover:bg-green-500 text-white"
-            }`}
-          >
-            {isAnalyzing ? (
-              <>
-                <span className="flex gap-1">
-                  {[0, 1, 2].map((i) => (
-                    <span
-                      key={i}
-                      className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"
-                      style={{ animationDelay: `${i * 0.15}s` }}
-                    />
-                  ))}
-                </span>
-                {getText("جارٍ التحليل…", "Analyzing…")}
-              </>
-            ) : (
-              <>
-                <Brain className="w-4 h-4" />
-                {getText("تحليل الصفقة بالذكاء الاصطناعي", "Analyze deal with AI")}
-              </>
-            )}
-          </button>
+        <div>
           <button
             onClick={handleExportPDF}
-            className="flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-semibold text-sm border-2 border-green-600 text-green-600 hover:bg-green-50 transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-semibold text-sm border-2 border-green-600 text-green-600 hover:bg-green-50 transition-colors"
           >
             <FileDown className="w-4 h-4" />
             {getText("تصدير تقرير PDF", "Export PDF report")}
           </button>
         </div>
-
-        {/* ── AI Results ── */}
-        {aiResults && (
-          <div className="space-y-3">
-            {/* Summary */}
-            <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-              <div className={`flex items-center gap-2 px-5 py-3 border-b border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <BarChart3 className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-semibold text-gray-800">
-                  {getText("ملخص صحة الصفقة", "Deal health summary")}
-                </span>
-              </div>
-              <div className="px-5 py-4">
-                <p
-                  className="text-sm text-gray-600 leading-relaxed"
-                  dir={isRTL ? "rtl" : "ltr"}
-                >
-                  {aiResults.summary}
-                </p>
-              </div>
-            </div>
-
-            {/* Risks + Actions */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {/* Risks */}
-              <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-                <div className={`flex items-center gap-2 px-5 py-3 border-b border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
-                  <AlertTriangle className="w-4 h-4 text-red-500" />
-                  <span className="text-sm font-semibold text-gray-800">
-                    {getText("مخاطر الصفقة", "Deal risks")}
-                  </span>
-                </div>
-                <div className="px-5 py-4 space-y-3">
-                  {aiResults.risks.map((risk, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-2.5 ${isRTL ? "flex-row-reverse" : ""}`}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0 mt-1.5" />
-                      <p
-                        className="text-sm text-gray-600 leading-relaxed"
-                        dir={isRTL ? "rtl" : "ltr"}
-                      >
-                        {risk}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-                <div className={`flex items-center gap-2 px-5 py-3 border-b border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
-                  <ArrowRight className="w-4 h-4 text-green-600" />
-                  <span className="text-sm font-semibold text-gray-800">
-                    {getText("أفضل الإجراءات التالية", "Next best actions")}
-                  </span>
-                </div>
-                <div className="px-5 py-4 space-y-3">
-                  {aiResults.actions.map((action, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-2.5 ${isRTL ? "flex-row-reverse" : ""}`}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0 mt-1.5" />
-                      <p
-                        className="text-sm text-gray-600 leading-relaxed"
-                        dir={isRTL ? "rtl" : "ltr"}
-                      >
-                        {action}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Placeholder when no analysis yet */}
-        {!aiResults && !isAnalyzing && (
-          <div className="bg-white border border-dashed border-gray-200 rounded-2xl p-8 text-center">
-            <Brain className="w-8 h-8 text-gray-300 mx-auto mb-3" />
-            <p className="text-sm text-gray-400">
-              {getText(
-                "أكمل حقول MEDDICC ثم شغّل تحليل الذكاء الاصطناعي",
-                "Complete the MEDDICC fields above and run AI analysis to see deal risks and next actions"
-              )}
-            </p>
-          </div>
-        )}
 
       </div>
 
