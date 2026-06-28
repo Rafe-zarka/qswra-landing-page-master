@@ -6,6 +6,7 @@ import { MenuIcon, XIcon, PhoneIcon, MailIcon } from "lucide-react";
 import { useLanguage } from "@/polymet/components/language-context";
 import LanguageToggle from "@/polymet/components/language-toggle";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDemoModal } from "@/polymet/components/demo-modal-context";
 import qswraLogo from "@/assets/qswra-logo-no-background.png";
 
 interface Navigation {
@@ -24,6 +25,7 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
   const { getText, isRTL } = useLanguage();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { openModal } = useDemoModal();
   const isCyberphish = pathname.startsWith("/products/cyberphish");
 
   const handleNavClick = (href: string) => {
@@ -141,7 +143,7 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
               <Button
                 size="sm"
                 className="bg-gradient-to-r from-green-600 to-teal-500 hover:from-green-700 hover:to-teal-600 text-white gap-1.5 shadow-sm shadow-green-200 font-semibold px-5"
-                onClick={() => navigate("/products/cyberphish/contact")}
+                onClick={openModal}
               >
                 {getText("احجز عرضًا", "Book a Demo")}
               </Button>
@@ -153,7 +155,7 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                 variant="outline"
                 size="sm"
                 className="gap-2"
-                onClick={() => window.open("tel:+966575741337", "_self")}
+                onClick={() => window.open("tel:+966575043074", "_self")}
               >
                 <PhoneIcon className="h-4 w-4" />
                 {getText("اتصل بنا", "Call Us")}
@@ -251,7 +253,7 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                     </Button>
                     <Button
                       className="w-full bg-gradient-to-r from-green-600 to-teal-500 hover:from-green-700 hover:to-teal-600 text-white font-semibold"
-                      onClick={() => { navigate("/products/cyberphish/contact"); setIsOpen(false); }}
+                      onClick={() => { openModal(); setIsOpen(false); }}
                     >
                       {getText("احجز عرضًا", "Book a Demo")}
                     </Button>
@@ -261,7 +263,7 @@ export default function QswraHeader({ navigation }: QswraHeaderProps) {
                     <Button
                       variant="outline"
                       className="w-full gap-2"
-                      onClick={() => window.open("tel:+966575741337", "_self")}
+                      onClick={() => window.open("tel:+966575043074", "_self")}
                     >
                       <PhoneIcon className="h-4 w-4" />
                       {getText("اتصل بنا", "Call Us")}

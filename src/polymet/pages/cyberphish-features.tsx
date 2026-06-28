@@ -1,12 +1,14 @@
 import { useLanguage } from "@/polymet/components/language-context";
 import { Mail, Sparkles, Zap, Gauge, BarChart2, BookOpen, Check, Sun, Moon } from "lucide-react";
 import { Browser, Eyebrow, SectionHead, PageHero, FinalCTA, GradText, useTheme, card } from "@/polymet/components/cyberphish-shared";
+import { useDemoModal } from "@/polymet/components/demo-modal-context";
 
 const BASE = import.meta.env.BASE_URL + "screenshots/";
 
 export default function CyberPhishFeatures() {
   const { getText, isRTL } = useLanguage();
   const { dark, toggle } = useTheme();
+  const { openModal } = useDemoModal();
 
   const CAPS = [
     { Icon: Mail,     title: getText("محاكاة التصيد", "Phishing simulations"),           desc: getText("حملات موجهة ومحلية. جاهزة أو مخصصة بالكامل، مع صفحات هبوط واقعية.", "Targeted, localized campaigns. Templated or fully custom, with realistic landing pages.") },
@@ -29,7 +31,7 @@ export default function CyberPhishFeatures() {
         { t: getText("صوت وفيديو مضمّنان.", "Audio and video included."), d: getText("شرائح وسرد وفيديو من خط إنتاج واحد.", "Slides, narration and video produced from one pipeline.") },
         { t: getText("قابلة للتعديل.", "Editable."), d: getText("عدّل أي شريحة قبل النشر.", "Tweak any slide before publishing.") },
       ],
-      url: "app.cyberphish.io / courses / ai-generate",
+      url: "cyberphish.com / courses / ai-generate",
       img: BASE + "step1-create-course.png",
     },
     {
@@ -43,7 +45,7 @@ export default function CyberPhishFeatures() {
         { t: getText("إلزامي أو اختياري.", "Required vs optional."), d: getText("فصل واضح بين محتوى الامتثال الإلزامي ومحتوى التطوير.", "Clear separation between mandatory compliance and growth content.") },
         { t: getText("تقدّم لحظي.", "Live progress."), d: getText("كل قسم، كل درجة، في عرض واحد.", "Every section, every score, in one view.") },
       ],
-      url: "app.cyberphish.io / courses",
+      url: "cyberphish.com / courses",
       img: BASE + "step4-analytics.png",
     },
     {
@@ -57,7 +59,7 @@ export default function CyberPhishFeatures() {
         { t: getText("صعوبة تتدرج.", "Progressive difficulty."), d: getText("كل سيناريو يتكيف مع ملف مخاطر الموظف.", "Each scenario adapts to the employee's risk profile.") },
         { t: getText("علاج يُسند تلقائيًا.", "Auto remediation."), d: getText("نقر على محاكاة؟ المختبر المناسب يُجدول تلقائيًا.", "Clicked a phish? The matching lab queues up automatically.") },
       ],
-      url: "app.cyberphish.io / labs",
+      url: "cyberphish.com / labs",
       img: BASE + "step3-interactive-labs.png",
     },
     {
@@ -71,7 +73,7 @@ export default function CyberPhishFeatures() {
         { t: getText("تهديد الشهر.", "Threat of the month."), d: getText("يُملأ تلقائيًا بأبرز اتجاهات الهجوم.", "Auto populated with relevant attack trends.") },
         { t: getText("تفاعل قابل للقياس.", "Engagement tracked."), d: getText("الفتح والنقر والإجابات تغذي درجة المخاطر.", "Opens, clicks, and quiz responses feed your risk score.") },
       ],
-      url: "app.cyberphish.io / newsletters",
+      url: "cyberphish.com / newsletters",
       img: BASE + "step2-phishing-sim.png",
     },
   ];
@@ -104,15 +106,12 @@ export default function CyberPhishFeatures() {
         sub={getText("من محاكاة التصيد إلى مولّد الدورات الذكي إلى المختبرات التفاعلية. كل مزية تنتهي بنتيجة قابلة للقياس.", "From phishing simulation to AI course generation to interactive labs. Every capability ends with a measurable outcome.")}
       >
         <div className={`flex flex-col sm:flex-row gap-3 justify-center ${isRTL ? "sm:flex-row-reverse" : ""}`}>
-          <a href="https://cyberphish-staging.laravel.cloud/register" target="_blank" rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg"
+          <button
+            onClick={openModal}
+            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg transition-opacity hover:opacity-90"
             style={{ background: "#10B981" }}>
             {getText("اطلب عرضًا توضيحيًا", "Book a demo")} →
-          </a>
-          <a href="https://cyberphish-staging.laravel.cloud/dashboard" target="_blank" rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-gray-200 dark:border-white/[0.12] text-gray-700 dark:text-[#A7B4C0] hover:bg-gray-50 dark:hover:bg-white/[0.04] font-semibold text-sm transition-colors">
-            {getText("شاهد الأسعار", "See pricing")}
-          </a>
+          </button>
         </div>
       </PageHero>
 

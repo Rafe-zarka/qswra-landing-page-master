@@ -8,12 +8,17 @@ import {
   Trophy,
   BarChart2,
   BookOpen,
-  X,
   Star,
   Sun,
   Moon,
   Users,
+  CalendarClock,
+  Globe2,
+  TrendingUp,
+  ShieldAlert,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useDemoModal } from "@/polymet/components/demo-modal-context";
 
 const BASE = import.meta.env.BASE_URL + "screenshots/";
 
@@ -95,6 +100,7 @@ function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: React.Re
 export default function CyberPhishProduct() {
   const { getText, isRTL } = useLanguage();
   const { dark, toggle } = useTheme();
+  const { openModal } = useDemoModal();
   const [activeFeature, setActiveFeature] = useState(0);
 
   const FEATURES = [
@@ -102,56 +108,56 @@ export default function CyberPhishProduct() {
       Icon: Sparkles,
       title: getText("توليد الدورات بالذكاء الاصطناعي", "AI-Powered Course Generation"),
       desc: getText("أنشئ دورات تدريبية كاملة — شرائح وسرد صوتي وفيديو — من نص واحد. متاح بالعربية والإنجليزية خلال دقائق.", "Generate complete training courses — slides, narration, and video — from a single prompt. Available in Arabic and English in minutes."),
-      url: "app.cyberphish.io / courses / ai-generate",
+      url: "cyberphish.com / courses / ai-generate",
       img: BASE + "feature-ai-course-generation.png",
     },
     {
       Icon: Mail,
       title: getText("محاكاة التصيد الاحتيالي", "Phishing Simulations"),
       desc: getText("شغّل حملات تصيد واقعية ومحلية بقوالب مخصصة وصفحات هبوط واقعية لكشف مواطن المخاطر الحقيقية.", "Run targeted, realistic phishing campaigns with localized templates and custom landing pages to expose where risk actually lives."),
-      url: "app.cyberphish.io / simulations",
+      url: "cyberphish.com / simulations",
       img: BASE + "feature-phishing-simulations.jpeg",
     },
     {
       Icon: Zap,
       title: getText("المختبرات التفاعلية", "Interactive Labs"),
       desc: getText("تدريب عملي عبر البريد والويب والجوال وأسطح هجوم الأجهزة — قابل للتشغيل داخل المتصفح بدون إعداد مسبق.", "Hands-on practice across email, web, mobile, and desktop attack surfaces — playable in the browser without any setup."),
-      url: "app.cyberphish.io / labs",
+      url: "cyberphish.com / labs",
       img: BASE + "feature-interactive-labs.png",
     },
     {
       Icon: Trophy,
       title: getText("لوحة المتصدرين", "Leaderboard"),
       desc: getText("حفّز الموظفين بلوحة متصدرين تعرض تقدم الأقسام والأفراد وتشجع على المشاركة المستمرة في التدريب.", "Motivate employees with a live leaderboard tracking department and individual progress, driving ongoing training engagement."),
-      url: "app.cyberphish.io / leaderboard",
+      url: "cyberphish.com / leaderboard",
       img: BASE + "feature-leaderboard.png",
     },
     {
       Icon: BarChart2,
       title: getText("التحليلات والتقارير", "Analytics & Reporting"),
       desc: getText("رؤية المخاطر البشرية على مستوى الأقسام مع تقارير جاهزة للمدققين مرتبطة بضوابط ISO 27001 وNIST وPCI DSS.", "Department-level human risk visibility with audit-ready reports mapped to ISO 27001, NIST, and PCI DSS controls."),
-      url: "app.cyberphish.io / analytics",
+      url: "cyberphish.com / analytics",
       img: BASE + "feature-analytics-reporting.png",
     },
     {
       Icon: BookOpen,
       title: getText("تكامل SCORM ونظام إدارة التعلم", "SCORM & LMS Integration"),
       desc: getText("استورد محتوى تدريبيًا قائمًا أو صدّر محتوى سايبرفش إلى نظام إدارة التعلم المؤسسي. دعم كامل لـ SCORM 1.2 و2004.", "Import existing courseware or export CyberPhish content to your enterprise LMS. Full SCORM 1.2 and 2004 support."),
-      url: "app.cyberphish.io / courses",
+      url: "cyberphish.com / courses",
       img: BASE + "feature-scorm-lms.png",
     },
     {
       Icon: Mail,
       title: getText("النشرات الإخبارية والتعزيز المستمر", "Newsletters & Reinforcement"),
       desc: getText("أرسل نشرات داخلية بعلامتك تتضمن ملخصات التهديدات الشهرية واختبارات مراجعة لتعزيز الوعي بين الحملات.", "Send branded internal newsletters with monthly threat briefings and recap quizzes to reinforce awareness between campaigns."),
-      url: "app.cyberphish.io / newsletters",
+      url: "cyberphish.com / newsletters",
       img: BASE + "feature-newsletters.png",
     },
     {
       Icon: Users,
       title: getText("مجموعات الموظفين والتعلم المستهدف", "Employee Groups & Targeted Learning"),
       desc: getText("نظّم الموظفين في مجموعات وأسند مسارات تدريب مستهدفة بناءً على الدور أو القسم أو درجة المخاطر.", "Organize employees into groups and assign targeted training paths based on role, department, or risk score."),
-      url: "app.cyberphish.io / groups",
+      url: "cyberphish.com / groups",
       img: BASE + "feature-employee-groups.png",
     },
   ];
@@ -203,14 +209,15 @@ export default function CyberPhishProduct() {
                 {getText("تساعد سايبرفش فرق الأمن السيبراني في الشركات على محاكاة هجمات التصيد، وتنفيذ تدريبات توعية مدعومة بالذكاء الاصطناعي، وخفض المخاطر البشرية بشكل قابل للقياس. متاحة بالعربية والإنجليزية أو كليهما.", "CyberPhish helps enterprise security teams simulate phishing attacks, run AI generated awareness training, and measurably reduce human cyber risk. Available in Arabic, English, or both.")}
               </p>
               <div className={`flex flex-col sm:flex-row gap-3 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
-                <a href="/products/cyberphish/contact"
+                <button
+                  onClick={openModal}
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white transition-colors shadow-lg"
                   style={{ background: "#10B981" }}
                   onMouseOver={e => (e.currentTarget.style.background = "#059669")}
                   onMouseOut={e => (e.currentTarget.style.background = "#10B981")}
                 >
                   {getText("أريد عرضًا توضيحيًا", "I Want a Demo")} →
-                </a>
+                </button>
                 <a href="https://cyberphish-staging.laravel.cloud/dashboard" target="_blank" rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-gray-200 dark:border-white/[0.12] text-gray-700 dark:text-[#A7B4C0] hover:bg-gray-50 dark:hover:bg-white/[0.04] font-semibold text-sm transition-colors"
                 >
@@ -222,7 +229,7 @@ export default function CyberPhishProduct() {
             <div className="relative">
               <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(16,185,129,0.12) 0%, transparent 70%)" }} />
               <div className="relative">
-                <Browser url="app.cyberphish.io / dashboard" img={BASE + "hero-dashboard.png"} alt="CyberPhish dashboard" />
+                <Browser url="cyberphish.com / dashboard" img={BASE + "hero-dashboard.png"} alt="CyberPhish dashboard" />
                 <div className={`absolute -top-5 ${isRTL ? "-left-4" : "-right-4"} ${card} px-4 py-3 flex items-center gap-3 animate-float`}>
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(16,185,129,0.1)", color: "#10B981" }}>
                     <Shield size={15} />
@@ -307,30 +314,65 @@ export default function CyberPhishProduct() {
       </section>
 
       {/* ── 5. WHY FAILS ── */}
-      <section className="py-24 md:py-32 bg-gray-50 dark:bg-[#0F1620]">
-        <div className="container mx-auto px-6 max-w-5xl">
+      <section className="py-24 md:py-32 bg-gray-50 dark:bg-[#0F1620] relative overflow-hidden">
+        {/* Subtle background graphic */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-0 end-0 w-[500px] h-[500px] bg-gradient-to-bl from-green-100/40 to-transparent dark:from-green-900/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 start-0 w-[400px] h-[400px] bg-gradient-to-tr from-teal-100/30 to-transparent dark:from-teal-900/10 rounded-full blur-3xl" />
+        </div>
+        <div className="relative container mx-auto px-6 max-w-5xl">
           <SectionHead
             eyebrow={getText("لماذا تفشل برامج التوعية التقليدية", "Why traditional awareness training fails")}
-            title={getText("صناديق الامتثال لا تغيّر السلوك.", "Compliance checkboxes do not change behavior.")}
+            title={getText("التدريب على مربعات الاختيار لا يغيّر السلوك.", "Checkbox training doesn't change behavior.")}
             sub={getText("صُممت معظم برامج التوعية للمدققين لا للموظفين. سايبرفش مبنية لتغيير سلوكي قابل للقياس مدعوم بأدلة من المحاكاة.", "Most awareness programs were built for auditors, not employees. CyberPhish is built for measurable behavior change, backed by simulation evidence.")}
           />
           <div className="grid sm:grid-cols-2 gap-5">
-            {[
-              { t: getText("إرهاق الامتثال السنوي", "Annual compliance fatigue"),                 d: getText("وحدات SCORM السنوية ترضي المدققين، لكنها تترك الموظفين غير مكترثين وغير مستعدين بعد ثلاثة أشهر.", "Once a year SCORM modules satisfy auditors but leave employees disengaged and unprepared by month three.") },
-              { t: getText("محتوى عام بالإنجليزية فقط", "Generic, English only content"),         d: getText("نادرًا ما يعكس المحتوى الجاهز السياق المحلي أو دقائق اللغة أو التهديدات الخاصة بقطاعك.", "Off the shelf training rarely reflects local context, language nuance, or the specific threats your industry faces.") },
-              { t: getText("غياب التغيير السلوكي القابل للقياس", "No measurable behavior change"), d: getText("نسب الإكمال ليست تخفيضًا للمخاطر. بدون بيانات محاكاة لن تستطيع إثبات أن التوعية تعمل.", "Completion rates are not risk reduction. Without simulation data, you cannot prove security awareness is working.") },
-              { t: getText("منفصل عن الهجمات الحقيقية", "Disconnected from real attacks"),         d: getText("التدريب ومحاكاة التصيد يعيشان في أدوات منفصلة، فلا يمكن ربط حدث نقر بنتيجة تعلّم.", "Training and phishing simulation live in separate tools, so teams cannot tie a click event to a learning outcome.") },
-            ].map((f, i) => (
-              <div key={i} className={`${card} p-7 flex gap-4`} style={{ borderColor: undefined }}>
-                <div className="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <X size={13} className="text-red-500" />
+            {([
+              {
+                Icon: CalendarClock,
+                accent: { bg: "bg-amber-50 dark:bg-amber-900/20", border: "border-amber-100 dark:border-amber-500/20", icon: "text-amber-500" },
+                t: getText("إرهاق الامتثال السنوي", "Annual compliance fatigue"),
+                d: getText("وحدات SCORM السنوية ترضي المدققين، لكنها تترك الموظفين غير مكترثين وغير مستعدين بعد ثلاثة أشهر.", "Once a year SCORM modules satisfy auditors but leave employees disengaged and unprepared by month three."),
+              },
+              {
+                Icon: Globe2,
+                accent: { bg: "bg-blue-50 dark:bg-blue-900/20", border: "border-blue-100 dark:border-blue-500/20", icon: "text-blue-500" },
+                t: getText("محتوى عام بالإنجليزية فقط", "Generic, English only content"),
+                d: getText("نادرًا ما يعكس المحتوى الجاهز السياق المحلي أو دقائق اللغة أو التهديدات الخاصة بقطاعك.", "Off the shelf training rarely reflects local context, language nuance, or the specific threats your industry faces."),
+              },
+              {
+                Icon: TrendingUp,
+                accent: { bg: "bg-purple-50 dark:bg-purple-900/20", border: "border-purple-100 dark:border-purple-500/20", icon: "text-purple-500" },
+                t: getText("غياب التغيير السلوكي القابل للقياس", "No measurable behavior change"),
+                d: getText("نسب الإكمال ليست تخفيضًا للمخاطر. بدون بيانات محاكاة لن تستطيع إثبات أن التوعية تعمل.", "Completion rates are not risk reduction. Without simulation data, you cannot prove security awareness is working."),
+              },
+              {
+                Icon: ShieldAlert,
+                accent: { bg: "bg-rose-50 dark:bg-rose-900/20", border: "border-rose-100 dark:border-rose-500/20", icon: "text-rose-500" },
+                t: getText("منفصل عن الهجمات الحقيقية", "Disconnected from real attacks"),
+                d: getText("التدريب ومحاكاة التصيد يعيشان في أدوات منفصلة، فلا يمكن ربط حدث نقر بنتيجة تعلّم.", "Training and phishing simulation live in separate tools, so teams cannot tie a click event to a learning outcome."),
+              },
+            ] as const).map((f, i) => (
+              <div key={i} className={`${card} p-7 flex gap-5 hover:shadow-md transition-all`}>
+                <div className={`w-10 h-10 rounded-xl ${f.accent.bg} border ${f.accent.border} flex items-center justify-center shrink-0 mt-0.5`}>
+                  <f.Icon size={18} className={f.accent.icon} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-[#E8EEF3] text-sm mb-1.5">{f.t}</h4>
+                  <h4 className="font-bold text-gray-900 dark:text-[#E8EEF3] text-base mb-2">{f.t}</h4>
                   <p className="text-gray-500 dark:text-[#7B8794] text-sm leading-relaxed">{f.d}</p>
                 </div>
               </div>
             ))}
+          </div>
+          {/* CTA */}
+          <div className="mt-12 text-center">
+            <button
+              onClick={openModal}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg shadow-green-200/50 dark:shadow-green-900/30 transition-opacity hover:opacity-90"
+              style={{ background: "linear-gradient(135deg,#10B981,#14B8A6)" }}
+            >
+              {getText("شاهد كيف يغيّر سايبرفش السلوك", "See how CyberPhish changes behavior")} →
+            </button>
           </div>
         </div>
       </section>
@@ -488,19 +530,20 @@ export default function CyberPhishProduct() {
             {getText("شاهد عرضًا لمدة 30 دقيقة على بياناتك. دون التزام ودون شرائح تقديمية.", "See a 30 minute walkthrough of CyberPhish on your own data. No commitment, no slide deck demo.")}
           </p>
           <div className={`flex flex-col sm:flex-row gap-3 justify-center ${isRTL ? "sm:flex-row-reverse" : ""}`}>
-            <a href="https://cyberphish-staging.laravel.cloud/register" target="_blank" rel="noreferrer"
+            <button
+              onClick={openModal}
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white transition-colors shadow-lg"
               style={{ background: "#10B981" }}
               onMouseOver={e => (e.currentTarget.style.background = "#059669")}
               onMouseOut={e => (e.currentTarget.style.background = "#10B981")}
             >
               {getText("اطلب عرضًا توضيحيًا", "Book a demo")} →
-            </a>
-            <a href="https://cyberphish-staging.laravel.cloud/dashboard" target="_blank" rel="noreferrer"
+            </button>
+            <Link to="/products/cyberphish/contact"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/25 bg-white/10 text-white hover:bg-white/20 font-semibold text-sm transition-colors"
             >
               {getText("تحدث مع المبيعات", "Talk to sales")}
-            </a>
+            </Link>
           </div>
           <div className={`flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-green-200/50 justify-center mt-7 ${isRTL ? "flex-row-reverse" : ""}`}>
             <span>SOC 2 Type II</span><span className="opacity-40">·</span>

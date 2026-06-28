@@ -69,11 +69,11 @@ export default function QswraContact() {
                       <h3 className="font-semibold mb-1">
                         {getText("الهاتف", "Phone")}
                       </h3>
-                      <a 
-                        href="tel:+966575741337"
+                      <a
+                        href="tel:+966575043074"
                         className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        +966 57 574 1337
+                        +966 57 504 3074
                       </a>
                       <p className="text-sm text-gray-500">
                         {getText(

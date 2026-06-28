@@ -4,6 +4,8 @@ import QswraHeader from "@/polymet/components/qswra-header";
 import QswraFooter from "@/polymet/components/qswra-footer";
 import CyberphishFooter from "@/polymet/components/cyberphish-footer";
 import { LanguageProvider } from "@/polymet/components/language-context";
+import { DemoModalProvider } from "@/polymet/components/demo-modal-context";
+import DemoModal from "@/polymet/components/demo-modal";
 import { navigation, cyberphishNavigation } from "@/polymet/data/qswra-data";
 
 interface QswraLayoutProps {
@@ -44,6 +46,8 @@ function LayoutInner({ children }: QswraLayoutProps) {
       <main className="flex-1 flex flex-col">{children}</main>
 
       {isCyberphish ? <CyberphishFooter /> : <QswraFooter />}
+
+      <DemoModal />
     </div>
   );
 }
@@ -51,7 +55,9 @@ function LayoutInner({ children }: QswraLayoutProps) {
 export default function QswraLayout({ children }: QswraLayoutProps) {
   return (
     <LanguageProvider>
-      <LayoutInner>{children}</LayoutInner>
+      <DemoModalProvider>
+        <LayoutInner>{children}</LayoutInner>
+      </DemoModalProvider>
     </LanguageProvider>
   );
 }

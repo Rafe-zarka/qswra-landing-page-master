@@ -310,8 +310,8 @@ export default function PrivacyPolicy() {
             </ul>
             <p className="mt-4">
               {getText(
-                "لممارسة أي من هذه الحقوق، يرجى الاتصال بنا على: info@qswra.com أو +966 57 574 1337",
-                "To exercise any of these rights, please contact us at: info@qswra.com or +966 57 574 1337"
+                "لممارسة أي من هذه الحقوق، يرجى الاتصال بنا على: info@qswra.com أو +966 57 504 3074",
+                "To exercise any of these rights, please contact us at: info@qswra.com or +966 57 504 3074"
               )}
             </p>
           </CardContent>
@@ -370,7 +370,7 @@ export default function PrivacyPolicy() {
                 <strong>{getText("البريد الإلكتروني:", "Email:")}</strong> info@qswra.com
               </p>
               <p>
-                <strong>{getText("الهاتف:", "Phone:")}</strong> +966 57 574 1337
+                <strong>{getText("الهاتف:", "Phone:")}</strong> +966 57 504 3074
               </p>
               <p>
                 <strong>{getText("العنوان:", "Address:")}</strong>{" "}

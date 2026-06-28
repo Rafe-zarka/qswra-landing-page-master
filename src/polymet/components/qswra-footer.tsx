@@ -146,8 +146,8 @@ export default function QswraFooter() {
                   <PhoneIcon className="h-4 w-4 text-blue-600" />
                 </div>
                 <div className={isRTL ? "text-right" : ""}>
-                  <a href="tel:+966575741337" className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium">
-                    +966 57 574 1337
+                  <a href="tel:+966575043074" className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium">
+                    +966 57 504 3074
                   </a>
                   <p className="text-gray-400 text-xs">{getText("الأحد – الخميس", "Sun – Thu")}</p>
                 </div>

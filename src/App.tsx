@@ -1,11 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import QswraLayout from "@/polymet/layouts/qswra-layout";
 import QswraLanding from "@/polymet/pages/qswra-landing";
 import CyberPhishProduct from "@/polymet/pages/cyberphish-product";
 import CyberPhishFeatures from "@/polymet/pages/cyberphish-features";
 import CyberPhishSolutions from "@/polymet/pages/cyberphish-solutions";
-import CyberPhishPricing from "@/polymet/pages/cyberphish-pricing";
-import CyberPhishResources from "@/polymet/pages/cyberphish-resources";
 import CyberPhishAbout from "@/polymet/pages/cyberphish-about";
 import CyberPhishContact from "@/polymet/pages/cyberphish-contact";
 import PhishAgentProduct from "@/polymet/pages/phish-agent-product";
@@ -91,11 +89,11 @@ export default function QswraPrototype() {
         />
         <Route
           path="/products/cyberphish/pricing"
-          element={<QswraLayout><CyberPhishPricing /></QswraLayout>}
+          element={<Navigate to="/products/cyberphish/contact" replace />}
         />
         <Route
           path="/products/cyberphish/resources"
-          element={<QswraLayout><CyberPhishResources /></QswraLayout>}
+          element={<Navigate to="/products/cyberphish" replace />}
         />
         <Route
           path="/products/cyberphish/about"

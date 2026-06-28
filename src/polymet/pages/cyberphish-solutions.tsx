@@ -1,10 +1,12 @@
 import { useLanguage } from "@/polymet/components/language-context";
 import { Sun, Moon } from "lucide-react";
 import { Eyebrow, SectionHead, PageHero, FinalCTA, GradText, useTheme, card } from "@/polymet/components/cyberphish-shared";
+import { useDemoModal } from "@/polymet/components/demo-modal-context";
 
 export default function CyberPhishSolutions() {
   const { getText, isRTL } = useLanguage();
   const { dark, toggle } = useTheme();
+  const { openModal } = useDemoModal();
 
   const BY_ROLE = [
     { tag: getText("الشركات الكبرى", "Enterprises"),           title: getText("خفض المخاطر البشرية على نطاق واسع", "Reduce human risk at scale"),        desc: getText("إدارة آلاف الموظفين عبر وحدات أعمال متعددة بنقاط مخاطر حسب الدور.", "Manage thousands of employees across business units with role based scoring."),    items: getText(["متعدد المستأجرين", "SSO وSCIM", "تقارير جاهزة للتدقيق"], ["Multi tenant", "SSO and SCIM", "Audit ready reporting"]) },
@@ -43,11 +45,12 @@ export default function CyberPhishSolutions() {
         title={<>{getText("من فريق تقنية مؤلف من شخصين ", "From a two person IT team ")}<GradText>{getText("إلى مؤسسات تضم 50 ألف موظف.", "to a fifty thousand employee enterprise.")}</GradText></>}
         sub={getText("تتوسع سايبرفش مع نضج برنامج الأمن لديك وتتكيف مع من يدير البرنامج فعليًا وما يحتاجه قطاعك.", "CyberPhish scales with your security maturity and adapts to who is running the program and what your industry requires.")}
       >
-        <a href="https://cyberphish-staging.laravel.cloud/register" target="_blank" rel="noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg"
+        <button
+          onClick={openModal}
+          className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg transition-opacity hover:opacity-90"
           style={{ background: "#10B981" }}>
           {getText("اطلب عرضًا توضيحيًا", "Book a demo")} →
-        </a>
+        </button>
       </PageHero>
 
       {/* By role */}

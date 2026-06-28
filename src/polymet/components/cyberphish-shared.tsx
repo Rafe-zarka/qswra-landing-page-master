@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/polymet/components/language-context";
+import { useDemoModal } from "@/polymet/components/demo-modal-context";
 
 // ── Theme ──────────────────────────────────────────────────────────────────────
 
@@ -88,6 +89,7 @@ export function PageHero({ eyebrow, title, sub, children }: {
 
 export function FinalCTA() {
   const { getText, isRTL } = useLanguage();
+  const { openModal } = useDemoModal();
   return (
     <section className="py-24 md:py-32 dark:border-t dark:border-white/[0.07]" style={{ background: "linear-gradient(135deg,#064e3b 0%,#065f46 50%,#0f766e 100%)" }}>
       <div className="container mx-auto px-6 max-w-3xl text-center">
@@ -100,14 +102,15 @@ export function FinalCTA() {
           {getText("شاهد عرضًا لمدة 30 دقيقة على بياناتك. دون التزام ودون شرائح تقديمية.", "See a 30 minute walkthrough of CyberPhish on your own data. No commitment, no slide deck demo.")}
         </p>
         <div className={`flex flex-col sm:flex-row gap-3 justify-center ${isRTL ? "sm:flex-row-reverse" : ""}`}>
-          <a href="https://cyberphish-staging.laravel.cloud/register" target="_blank" rel="noreferrer"
+          <button
+            onClick={openModal}
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg transition-colors"
             style={{ background: "#10B981" }}
             onMouseOver={e => (e.currentTarget.style.background = "#059669")}
             onMouseOut={e => (e.currentTarget.style.background = "#10B981")}
           >
             {getText("اطلب عرضًا توضيحيًا", "Book a demo")} →
-          </a>
+          </button>
           <Link to="/products/cyberphish/contact"
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/25 bg-white/10 text-white hover:bg-white/20 font-semibold text-sm transition-colors"
           >

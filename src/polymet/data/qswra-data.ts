@@ -264,8 +264,6 @@ export const navigation = [
 export const cyberphishNavigation = [
   { name: "المزايا", nameEn: "Features", href: "/products/cyberphish/features" },
   { name: "الحلول", nameEn: "Solutions", href: "/products/cyberphish/solutions" },
-  { name: "الأسعار", nameEn: "Pricing", href: "/products/cyberphish/pricing" },
-  { name: "الموارد", nameEn: "Resources", href: "/products/cyberphish/resources" },
   { name: "عن المنتج", nameEn: "About", href: "/products/cyberphish/about" },
   { name: "تواصل معنا", nameEn: "Contact", href: "/products/cyberphish/contact" },
 ];

@@ -177,11 +177,11 @@ export default function CyberphishFooter() {
             {/* Contact quick-links */}
             <div className="mt-6 space-y-2">
               <a
-                href="tel:+966575741337"
+                href="tel:+966575043074"
                 className={`flex items-center gap-2 text-xs text-gray-400 hover:text-green-600 transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
               >
                 <Phone className="h-3 w-3 shrink-0" />
-                +966 57 574 1337
+                +966 57 504 3074
               </a>
               <a
                 href="mailto:info@qswra.com"

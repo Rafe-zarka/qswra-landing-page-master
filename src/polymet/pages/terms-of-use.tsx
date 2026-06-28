@@ -376,7 +376,7 @@ export default function TermsOfUse() {
                 <strong>{getText("البريد الإلكتروني:", "Email:")}</strong> info@qswra.com
               </p>
               <p>
-                <strong>{getText("الهاتف:", "Phone:")}</strong> +966 57 574 1337
+                <strong>{getText("الهاتف:", "Phone:")}</strong> +966 57 504 3074
               </p>
               <p>
                 <strong>{getText("العنوان:", "Address:")}</strong>{" "}
