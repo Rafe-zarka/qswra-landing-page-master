@@ -29,25 +29,25 @@ export default function CyberPhishContact() {
       Icon: Zap,
       title: getText("المبيعات", "Sales"),
       desc: getText("لديك سؤال حول الخطط أو التسعير؟ فريق المبيعات هنا للمساعدة.", "Have a question about plans or pricing? Our sales team is here to help."),
-      email: "sales@cyberphish.io",
+      email: "sales@qswra.sa",
       cta: getText("تواصل مع المبيعات", "Contact sales"),
-      href: "#form",
+      href: "mailto:sales@qswra.sa",
     },
     {
       Icon: Shield,
       title: getText("الدعم الفني", "Support"),
       desc: getText("عملاء Business وEnterprise يحصلون على دعم ذي أولوية برد خلال 4 ساعات.", "Business and Enterprise customers get priority support with a 4 hour response time."),
-      email: "support@cyberphish.io",
+      email: "support@qswra.sa",
       cta: getText("افتح طلبًا", "Open a ticket"),
-      href: "#form",
+      href: "mailto:support@qswra.sa",
     },
     {
       Icon: Users,
       title: getText("الشراكات", "Partnerships"),
       desc: getText("موزعون، مزودو خدمات مدارة، واستشاريون مهتمون بتوفير سايبرفش لعملائهم.", "Resellers, MSPs, and consultants interested in offering CyberPhish to their customers."),
-      email: "partners@cyberphish.io",
+      email: "partners@qswra.sa",
       cta: getText("تواصل مع الشراكات", "Reach partnerships"),
-      href: "#form",
+      href: "mailto:partners@qswra.sa",
     },
   ];
 
@@ -291,9 +291,9 @@ export default function CyberPhishContact() {
               </div>
               <div className="border-t border-gray-100 dark:border-white/[0.07] pt-6">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-[#5E6B79] font-mono mb-3">
-                  {getText("الصحافة والإعلام", "Press and media")}
+                  {getText("هل لديك أسئلة؟ نحن هنا للأجابة ", "Have questions? We're here to help.")}
                 </div>
-                <a href="mailto:press@cyberphish.io" className="text-sm font-semibold" style={{ color: "#10B981" }}>press@cyberphish.io</a>
+                <a href="mailto:info@qswra.sa" className="text-sm font-semibold" style={{ color: "#10B981" }}>info@qswra.sa</a>
               </div>
             </div>
           </div>

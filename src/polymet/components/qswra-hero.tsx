@@ -10,6 +10,7 @@ import {
   PlayIcon,
 } from "lucide-react";
 import { useLanguage } from "@/polymet/components/language-context";
+import { scrollToSection } from "@/polymet/utils/scroll";
 import qswraLogoSvg from "@/assets/Qswra logo/Qswra.svg";
 
 interface QswraHeroProps {
@@ -31,12 +32,6 @@ export default function QswraHero({ companyInfo }: QswraHeroProps) {
   const { getText, isRTL } = useLanguage();
   const ArrowIcon = isRTL ? ArrowLeftIcon : ArrowRightIcon;
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section 

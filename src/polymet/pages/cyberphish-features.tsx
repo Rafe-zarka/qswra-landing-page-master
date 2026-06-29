@@ -31,7 +31,7 @@ export default function CyberPhishFeatures() {
         { t: getText("صوت وفيديو مضمّنان.", "Audio and video included."), d: getText("شرائح وسرد وفيديو من خط إنتاج واحد.", "Slides, narration and video produced from one pipeline.") },
         { t: getText("قابلة للتعديل.", "Editable."), d: getText("عدّل أي شريحة قبل النشر.", "Tweak any slide before publishing.") },
       ],
-      url: "cyberphish.com / courses / ai-generate",
+      url: "cyberphish.qswra.sa / courses / ai-generate",
       img: BASE + "step1-create-course.png",
     },
     {
@@ -45,7 +45,7 @@ export default function CyberPhishFeatures() {
         { t: getText("إلزامي أو اختياري.", "Required vs optional."), d: getText("فصل واضح بين محتوى الامتثال الإلزامي ومحتوى التطوير.", "Clear separation between mandatory compliance and growth content.") },
         { t: getText("تقدّم لحظي.", "Live progress."), d: getText("كل قسم، كل درجة، في عرض واحد.", "Every section, every score, in one view.") },
       ],
-      url: "cyberphish.com / courses",
+      url: "cyberphish.qswra.sa / courses",
       img: BASE + "step4-analytics.png",
     },
     {
@@ -59,7 +59,7 @@ export default function CyberPhishFeatures() {
         { t: getText("صعوبة تتدرج.", "Progressive difficulty."), d: getText("كل سيناريو يتكيف مع ملف مخاطر الموظف.", "Each scenario adapts to the employee's risk profile.") },
         { t: getText("علاج يُسند تلقائيًا.", "Auto remediation."), d: getText("نقر على محاكاة؟ المختبر المناسب يُجدول تلقائيًا.", "Clicked a phish? The matching lab queues up automatically.") },
       ],
-      url: "cyberphish.com / labs",
+      url: "cyberphish.qswra.sa / labs",
       img: BASE + "step3-interactive-labs.png",
     },
     {
@@ -73,7 +73,7 @@ export default function CyberPhishFeatures() {
         { t: getText("تهديد الشهر.", "Threat of the month."), d: getText("يُملأ تلقائيًا بأبرز اتجاهات الهجوم.", "Auto populated with relevant attack trends.") },
         { t: getText("تفاعل قابل للقياس.", "Engagement tracked."), d: getText("الفتح والنقر والإجابات تغذي درجة المخاطر.", "Opens, clicks, and quiz responses feed your risk score.") },
       ],
-      url: "cyberphish.com / newsletters",
+      url: "cyberphish.qswra.sa / newsletters",
       img: BASE + "step2-phishing-sim.png",
     },
   ];

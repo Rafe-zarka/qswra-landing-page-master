@@ -26,7 +26,7 @@ export default function QswraTestimonials({
   const { getText } = useLanguage();
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-4">

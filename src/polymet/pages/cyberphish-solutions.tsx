@@ -81,7 +81,7 @@ export default function CyberPhishSolutions() {
       </section>
 
       {/* By industry */}
-      <section className="py-24 md:py-32 bg-amber-50 dark:bg-[#0F1620]">
+      <section className="py-24 md:py-32 bg-gray-50 dark:bg-[#0F1620]">
         <div className="container mx-auto px-6 max-w-6xl">
           <SectionHead
             eyebrow={getText("حسب القطاع", "By industry")}

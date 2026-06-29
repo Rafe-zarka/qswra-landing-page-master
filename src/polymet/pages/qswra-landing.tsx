@@ -1,13 +1,13 @@
 import QswraHero from "@/polymet/components/qswra-hero";
 import QswraProducts from "@/polymet/components/qswra-products";
 import QswraFeatures from "@/polymet/components/qswra-features";
-// import QswraTestimonials from "@/polymet/components/qswra-testimonials";
+import QswraTestimonials from "@/polymet/components/qswra-testimonials";
 import QswraContact from "@/polymet/components/qswra-contact";
 import {
   companyInfo,
   products,
   features,
-  // testimonials,
+  testimonials,
 } from "@/polymet/data/qswra-data";
 
 export default function QswraLanding() {
@@ -22,8 +22,8 @@ export default function QswraLanding() {
       {/* Features Section */}
       <QswraFeatures features={features} />
 
-      {/* Testimonials Section - Hidden */}
-      {/* <QswraTestimonials testimonials={testimonials} /> */}
+      {/* About / Testimonials Section */}
+      <QswraTestimonials testimonials={testimonials} />
 
       {/* Contact Section */}
       <QswraContact />

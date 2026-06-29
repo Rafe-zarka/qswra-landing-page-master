@@ -91,7 +91,7 @@ export function FinalCTA() {
   const { getText, isRTL } = useLanguage();
   const { openModal } = useDemoModal();
   return (
-    <section className="py-24 md:py-32 dark:border-t dark:border-white/[0.07]" style={{ background: "linear-gradient(135deg,#064e3b 0%,#065f46 50%,#0f766e 100%)" }}>
+    <section id="contact" className="py-24 md:py-32 dark:border-t dark:border-white/[0.07]" style={{ background: "linear-gradient(135deg,#064e3b 0%,#065f46 50%,#0f766e 100%)" }}>
       <div className="container mx-auto px-6 max-w-3xl text-center">
         <Eyebrow light>{getText("جاهزون حين تكون جاهزًا", "Ready when you are")}</Eyebrow>
         <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
